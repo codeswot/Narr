@@ -80,6 +80,7 @@ class SocketService {
           if (obj['email'] == logoutEmail) {
             usersOnlineArray.removeAt(i);
             usersOnline.getUsersOnline(usersOnlineArray);
+            print(usersOnline.usersOnlineList.length);
           }
         }
       });
