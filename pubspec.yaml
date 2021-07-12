@@ -34,6 +34,10 @@ dependencies:
   flutter_speed_dial: ^3.0.5
   carousel_slider: ^4.0.0
   flutter_tags: ^0.4.9+1
+  fluttertoast: ^8.0.7
+  argon_buttons_flutter: ^1.1.0
+
+
 #  internet-web-url
   http: ^0.13.3
   dio: ^4.0.0
@@ -68,3 +72,6 @@ flutter:
 
   uses-material-design: true
 
+  assets:
+    - assets/images/png/
+  

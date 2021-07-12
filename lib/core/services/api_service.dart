@@ -1,44 +1,40 @@
+import 'dart:convert';
+
 import 'package:narr/shared/models/api_response_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   Future<ApiResponseModel> getRequest(
-      {required String url,
-      String? params,
-      Map<String, String>? headers}) async {
-    final Uri _uri = Uri.parse('$url/$params');
-    http.Response res = await http.get(
-      _uri,
-      headers: headers,
-    );
-
-    ApiResponseModel transformedResponse = ApiResponseModel(
+      {required String endpoint,
+      Map<String, String>? headers,
+      String? param}) async {
+    Uri _uri = Uri.parse('$endpoint?$param');
+    http.Response res = await http.get(_uri, headers: headers);
+    ApiResponseModel apiResponse = ApiResponseModel(
       body: res.body,
-      statusCode: res.statusCode,
       message: res.reasonPhrase,
+      statusCode: res.statusCode,
     );
 
-    return transformedResponse;
+    return apiResponse;
   }
 
-  Future<ApiResponseModel> postRequest(
-      {required String url,
-      String? params,
-      required Map<String, dynamic> body,
-      Map<String, String>? headers}) async {
-    final Uri _uri = Uri.parse('$url/$params');
+  Future<ApiResponseModel> postRequest(String endpoint,
+      {required Map<String, dynamic> body,
+      required Map<String, String> headers}) async {
+    Uri _uri = Uri.parse(endpoint);
     http.Response res = await http.post(
       _uri,
-      headers: headers!,
-      body: body,
+      headers: headers,
+      body: jsonEncode(body),
     );
 
-    ApiResponseModel transformedResponse = ApiResponseModel(
+    ApiResponseModel apiResponse = ApiResponseModel(
       body: res.body,
-      statusCode: res.statusCode,
       message: res.reasonPhrase,
+      statusCode: res.statusCode,
     );
 
-    return transformedResponse;
+    return apiResponse;
   }
 }
