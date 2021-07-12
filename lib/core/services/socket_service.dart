@@ -84,6 +84,18 @@ class SocketService {
           }
         }
       });
+
+      socket.on('EVENT:BLOCKCHAIN:ANALYTICS', (data) {
+        final decodedData = jsonDecode(data);
+        analytics.getBlockchainAnalytics(decodedData);
+        print(analytics.blockchainAnalytics);
+        // print(data);
+      });
+      socket.on('EVENT:BLOCKCHAIN:TRANSACTION', (data) {
+        final decodedData = jsonDecode(data);
+        transaction.getBlockchainTransaction(decodedData);
+        print(transaction.blockchainTransaction);
+      });
     } catch (err) {
       print('Error >>> $err');
     }
