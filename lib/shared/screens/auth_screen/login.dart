@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/module/admin/admin_layout.dart';
+import 'package:narr/module/researcher/researcher_layout.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth_screen/researcher_register.dart';
-import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/form_card.dart';
 import 'package:narr/shared/widgets/forms/auth_textfield.dart';
@@ -133,18 +134,14 @@ class _LoginState extends State<Login> {
                                     .handleLoginEvent(
                                         token: user.token, user: user.user)
                                     .then((value) {
-                                  narrService.routerService.popUntil(
-                                    context,
-                                    Dashboard(),
-                                  );
+                                  if (user.user.userRole == 'researcher') {
+                                    narrService.routerService
+                                        .popUntil(context, ResearcherApp());
+                                  } else if (user.user.userRole == 'admin') {
+                                    narrService.routerService
+                                        .popUntil(context, AdminApp());
+                                  }
                                 });
-                                // if (user.user.userRole == 'student') {
-                                //for debug sake ParentApp(); => StudentApp();
-
-                                // } else {
-                                //   si.routerService
-                                //       .popUntil(context, ParentApp());
-                                // }
                               });
                             }
                           },

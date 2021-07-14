@@ -80,9 +80,9 @@ class SocketService {
           if (obj['email'] == logoutEmail) {
             usersOnlineArray.removeAt(i);
             usersOnline.getUsersOnline(usersOnlineArray);
-            print(usersOnline.usersOnlineList.length);
           }
         }
+        print(usersOnline.usersOnlineList.length);
       });
 
       socket.on('EVENT:BLOCKCHAIN:ANALYTICS', (data) {
@@ -101,7 +101,7 @@ class SocketService {
     }
   }
 
-  void hnadleLogOutEvent() {
+  void handleLogOutEvent() {
     try {
       socket.emit('LOGOUT');
     } catch (e) {
