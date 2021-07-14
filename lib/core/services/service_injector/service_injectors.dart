@@ -9,6 +9,8 @@ class ServiceInjector {
   //utils services
   DialogInfoService dialogInfoService = DialogInfoService();
   RouterService routerService = RouterService();
+  InstitutionService institutionService = InstitutionService();
+  UtilityService utilityService = UtilityService();
   //frontend services
 }
 
