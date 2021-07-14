@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
+import 'package:narr/shared/screens/auth_screen/researcher_register.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/form_card.dart';
 import 'package:narr/shared/widgets/forms/auth_textfield.dart';
 
 class Login extends StatefulWidget {
-  static String id = 'login';
   @override
   _LoginState createState() => _LoginState();
 }
@@ -153,8 +153,10 @@ class _LoginState extends State<Login> {
                         SizedBox(height: 30.0),
                         GestureDetector(
                           onTap: () {
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(Register.id);
+                            narrService.routerService.nextRoute(
+                              context,
+                              Register(),
+                            );
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

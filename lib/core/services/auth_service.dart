@@ -3,6 +3,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/models/user_model.dart';
 import 'package:narr/shared/models/api_response_model.dart';
+import 'package:narr/shared/screens/auth_screen/verify_account.dart';
 
 class AuthService {
   late String token;
@@ -34,17 +35,19 @@ class AuthService {
     throw {'An Error Occurred Login in'};
   }
 
-  Future<void> register(
+  Future register(
       {required String fName,
       required String lName,
       required String dob,
       required String phone,
       required String address,
-      required institution,
+      required dynamic institution,
       required String email,
       required String password,
+      List? specialization,
+      List? interest,
       required context}) async {
-    // ApiResponse loginResponse;
+    dynamic code;
     try {
       ApiResponseModel regResponse = await narrService.apiService.postRequest(
         '$narrUrl/auth/register',
@@ -55,8 +58,10 @@ class AuthService {
           "lName": lName,
           "dob": dob,
           "phone": phone,
-          "addredd": address,
+          "address": address,
           "institution": institution,
+          "interest": interest,
+          "specialization": specialization,
         },
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -64,18 +69,24 @@ class AuthService {
       );
       if (regResponse.statusCode == 200) {
         var data = jsonDecode(regResponse.body);
-        var message = data['message'];
-        print(message);
+        code = data['statusCode'];
+        narrService.routerService.nextRoute(
+          context,
+          VerifyAccount(),
+        );
         // narrService.routerService.popUntil(context, LoginScreen());
       } else {
         var data = jsonDecode(regResponse.body);
         var errorMessage = data['message'];
+        print(errorMessage);
+        code = data['statusCode'];
         narrService.dialogInfoService.showToast(errorMessage);
         return data;
       }
     } catch (e) {
       print('an error Occurred => $e');
     }
+    return code;
   }
 }
 
