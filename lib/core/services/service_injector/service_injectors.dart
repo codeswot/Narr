@@ -12,6 +12,9 @@ class ServiceInjector {
   InstitutionService institutionService = InstitutionService();
   UtilityService utilityService = UtilityService();
   //frontend services
+
+  //research
+  ResearchService researchService = ResearchService();
 }
 
 ServiceInjector narrService = ServiceInjector();

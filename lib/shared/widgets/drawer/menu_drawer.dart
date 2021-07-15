@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/screens/auth_screen/login.dart';
-import 'package:narr/shared/themes/colors.dart';
+import 'package:narr/shared/screens/auth_screens/login.dart';
+import 'package:narr/shared/screens/dashboard.dart';
+import 'package:narr/shared/screens/research_screens/all_research.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -34,6 +35,10 @@ class DrawerItems extends StatelessWidget {
                           title: Text('Home'),
                           enabled: true,
                           onTap: () {
+                            narrService.routerService.nextRoute(
+                              context,
+                              Dashboard(),
+                            );
                             // Navigator.of(context)
                             //     .pushReplacementNamed(HomeScreen.id);
                             // Update the state of the app.
@@ -48,6 +53,10 @@ class DrawerItems extends StatelessWidget {
                           title: Text('Dashboard'),
                           enabled: true,
                           onTap: () {
+                            narrService.routerService.nextRoute(
+                              context,
+                              Dashboard(),
+                            );
                             // Navigator.of(context)
                             //     .pushReplacementNamed(AdminDashBoard.id);
                             // Update the state of the app.
@@ -103,10 +112,8 @@ class DrawerItems extends StatelessWidget {
                     leading: Icon(FontAwesomeIcons.database),
                     title: Text('Repository'),
                     onTap: () {
-                      // Navigator.of(context)
-                      //     .popAndPushNamed(RepositoryList.id);
-                      // Update the state of the app.
-                      // ...
+                      narrService.routerService
+                          .nextRoute(context, AllResearch());
                     },
                   ),
                   (currentUser.user.userRole == 'admin')
@@ -143,15 +150,17 @@ class DrawerItems extends StatelessWidget {
                           ],
                         )
                       : Container(),
-                  ListTile(
-                    leading: Icon(Icons.history),
-                    title: Text('Reading History'),
-                    onTap: () {
-                      // Navigator.of(context).popAndPushNamed(History.id);
-                      // Update the state of the app.
-                      // ...
-                    },
-                  ),
+                  currentUser.user.userRole == 'researcher'
+                      ? ListTile(
+                          leading: Icon(Icons.history),
+                          title: Text('Reading History'),
+                          onTap: () {
+                            // Navigator.of(context).popAndPushNamed(History.id);
+                            // Update the state of the app.
+                            // ...
+                          },
+                        )
+                      : Container(),
 
                   (currentUser.user.userRole == 'researcher' ||
                           currentUser.user.userRole == 'admin')

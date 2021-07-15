@@ -6,6 +6,7 @@ import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/header_card.dart';
 import 'package:narr/shared/widgets/cards/institution_info_card.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
+import 'package:narr/shared/widgets/cards/research_card.dart';
 import 'package:narr/shared/widgets/cards/users_online_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
 
@@ -267,7 +268,7 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           AnalyticsCard(
                             title: 'Value',
-                            info: 'Mentions in the last 1 year',
+                            info: '',
                             count:
                                 '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['value']}',
                             color: Colors.blue,
@@ -290,149 +291,191 @@ class _DashboardState extends State<Dashboard> {
                 ),
               );
             }),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 15,
-              ),
-              child: Column(
-                children: [
-                  //     ReadingHistoryCard(
-                  //       child: readingHistory.readingHistoryDocument.length < 1
-                  //           ? Center(
-                  //               child: Text(
-                  //                 'No Readding history yet!',
-                  //                 style: TextStyle(color: Colors.blue),
-                  //               ),
-                  //             )
-                  //           : ListView.separated(
-                  //               physics: NeverScrollableScrollPhysics(),
-                  //               itemCount:
-                  //                   readingHistory.readingHistoryDocument.length,
-                  //               separatorBuilder:
-                  //                   (BuildContext context, int index) => Divider(),
-                  //               itemBuilder: (context, index) {
-                  //                 return ListTile(
-                  //                   contentPadding: EdgeInsets.zero,
-                  //                   leading: CircleAvatar(
-                  //                     child: Icon(Icons.insert_drive_file),
-                  //                   ),
-                  //                   title: Text(
-                  //                     '${readingHistory.readingHistoryDocument[index]['researchTitle']}',
-                  //                     maxLines: 1,
-                  //                     overflow: TextOverflow.ellipsis,
-                  //                   ),
-                  //                   subtitle: Text(
-                  //                     '${readingHistory.readingHistoryDocument[index]['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
-                  //                     maxLines: 1,
-                  //                     overflow: TextOverflow.ellipsis,
-                  //                   ),
-                  //                   trailing: Column(
-                  //                     mainAxisAlignment: MainAxisAlignment.end,
-                  //                     children: [
-                  //                       Text(
-                  //                           '${readingHistory.readingHistoryDocument[index]['accessType']},'),
-                  //                       SizedBox(
-                  //                         height: 8,
-                  //                       ),
-                  //                       Text(
-                  //                         '${readingHistory.readingHistoryDocument[index]['nPages']}',
-                  //                         style: TextStyle(
-                  //                           color: Color(0xff00a368),
-                  //                         ),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                   onTap: () {
-                  //                     Navigator.push(
-                  //                       context,
-                  //                       MaterialPageRoute(
-                  //                         builder: (context) => ResearchWork(
-                  //                           researchId: readingHistory
-                  //                                   .readingHistoryDocument[index]
-                  //                               ['_id'],
-                  //                         ),
-                  //                       ),
-                  //                     );
-                  //                   },
-                  //                 );
-                  //               },
-                  //             ),
-                  //       itemCount: readingHistory.readingHistoryDocument.length,
-                  //     ),
-                  //     SizedBox(
-                  //       height: 15,
-                  //     ),
-                  //     TrendinCard(
-                  //       child: trending.readingTrends.length < 1
-                  //           ? Center(
-                  //               child: Text(
-                  //                 'No Trends yet!',
-                  //                 style: TextStyle(color: Colors.blue),
-                  //               ),
-                  //             )
-                  //           : ListView.separated(
-                  //               physics: NeverScrollableScrollPhysics(),
-                  //               itemBuilder: (context, index) {
-                  //                 return ListTile(
-                  //                   leading: CircleAvatar(
-                  //                     child: Icon(
-                  //                       Icons.insert_drive_file,
-                  //                       color: Colors.white,
-                  //                     ),
-                  //                     backgroundColor: Colors.blue,
-                  //                   ),
-                  //                   title: Text('Linial Warhead'),
-                  //                   subtitle: Text('Musa Damu'),
-                  //                   trailing: Text('12-03-2020'),
-                  //                 );
-                  //               },
-                  //               separatorBuilder: (context, index) {
-                  //                 return Divider(
-                  //                   thickness: 1.3,
-                  //                 );
-                  //               },
-                  //               itemCount: trending.readingTrends.length),
-                  //       itemCount: trending.readingTrends.length,
-                  //     ),
-                  //     SizedBox(height: 15.0),
-                  //     SuggestionCard(
-                  //       child: suggestion.readingSuggestions.length < 1
-                  //           ? Center(
-                  //               child: Text(
-                  //                 'No Suggestions yet!',
-                  //                 style: TextStyle(color: Colors.blue),
-                  //               ),
-                  //             )
-                  //           : ListView.separated(
-                  //               physics: NeverScrollableScrollPhysics(),
-                  //               itemBuilder: (context, index) {
-                  //                 return ListTile(
-                  //                   leading: CircleAvatar(),
-                  //                   title: Text('Axial Warhead'),
-                  //                   subtitle: Text('Musa Damu'),
-                  //                   trailing: Text('12-03-2020'),
-                  //                 );
-                  //               },
-                  //               separatorBuilder: (context, index) {
-                  //                 return Divider(
-                  //                   thickness: 1.3,
-                  //                 );
-                  //               },
-                  //               itemCount: suggestion.readingSuggestions.length),
-                  //       itemCount: suggestion.readingSuggestions.length,
-                  //     ),
-                  //     Analytics(
-                  //       chartWidget: chartWidget,
-                  //       title: '',
-                  //       child: Container(),
-                  //     ),
-                  //   ],
-                  // ),
-                  // ),
-                ],
-              ),
-            ),
+            currentUser.user.userRole == 'researcher'
+                ? Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                    child: ResearchCard(
+                      child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return Container();
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: 0,
+                      ),
+                      cardHeader: 'Reading History',
+                      itemCount: 0,
+                    ),
+                  )
+                : Container(),
+
+            currentUser.user.userRole == 'researcher'
+                ? Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                    child: ResearchCard(
+                      child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return Container();
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: 0,
+                      ),
+                      cardHeader: 'Reading Suggestion',
+                      itemCount: 0,
+                    ),
+                  )
+                : Container(),
+
+            currentUser.user.userRole == 'researcher'
+                ? Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                    child: ResearchCard(
+                      child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return Container();
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: 0,
+                      ),
+                      cardHeader: 'Trending',
+                      itemCount: 0,
+                    ),
+                  )
+                : Container(),
+
+            // Analytics(
+            //   chartWidget: chartWidget,
+            //   title: '',
+            //   child: Container(),
+            // ),
+            //     ReadingHistoryCard(
+            //       child: readingHistory.readingHistoryDocument.length < 1
+            //           ? Center(
+            //               child: Text(
+            //                 'No Readding history yet!',
+            //                 style: TextStyle(color: Colors.blue),
+            //               ),
+            //             )
+            //           : ListView.separated(
+            //               physics: NeverScrollableScrollPhysics(),
+            //               itemCount:
+            //                   readingHistory.readingHistoryDocument.length,
+            //               separatorBuilder:
+            //                   (BuildContext context, int index) => Divider(),
+            //               itemBuilder: (context, index) {
+            //                 return ListTile(
+            //                   contentPadding: EdgeInsets.zero,
+            //                   leading: CircleAvatar(
+            //                     child: Icon(Icons.insert_drive_file),
+            //                   ),
+            //                   title: Text(
+            //                     '${readingHistory.readingHistoryDocument[index]['researchTitle']}',
+            //                     maxLines: 1,
+            //                     overflow: TextOverflow.ellipsis,
+            //                   ),
+            //                   subtitle: Text(
+            //                     '${readingHistory.readingHistoryDocument[index]['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
+            //                     maxLines: 1,
+            //                     overflow: TextOverflow.ellipsis,
+            //                   ),
+            //                   trailing: Column(
+            //                     mainAxisAlignment: MainAxisAlignment.end,
+            //                     children: [
+            //                       Text(
+            //                           '${readingHistory.readingHistoryDocument[index]['accessType']},'),
+            //                       SizedBox(
+            //                         height: 8,
+            //                       ),
+            //                       Text(
+            //                         '${readingHistory.readingHistoryDocument[index]['nPages']}',
+            //                         style: TextStyle(
+            //                           color: Color(0xff00a368),
+            //                         ),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                   onTap: () {
+            //                     Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                         builder: (context) => ResearchWork(
+            //                           researchId: readingHistory
+            //                                   .readingHistoryDocument[index]
+            //                               ['_id'],
+            //                         ),
+            //                       ),
+            //                     );
+            //                   },
+            //                 );
+            //               },
+            //             ),
+            //       itemCount: readingHistory.readingHistoryDocument.length,
+            //     ),
+            //     SizedBox(
+            //       height: 15,
+            //     ),
+            //     TrendinCard(
+            //       child: trending.readingTrends.length < 1
+            //           ? Center(
+            //               child: Text(
+            //                 'No Trends yet!',
+            //                 style: TextStyle(color: Colors.blue),
+            //               ),
+            //             )
+            //           : ListView.separated(
+            //               physics: NeverScrollableScrollPhysics(),
+            //               itemBuilder: (context, index) {
+            //                 return ListTile(
+            //                   leading: CircleAvatar(
+            //                     child: Icon(
+            //                       Icons.insert_drive_file,
+            //                       color: Colors.white,
+            //                     ),
+            //                     backgroundColor: Colors.blue,
+            //                   ),
+            //                   title: Text('Linial Warhead'),
+            //                   subtitle: Text('Musa Damu'),
+            //                   trailing: Text('12-03-2020'),
+            //                 );
+            //               },
+            //               separatorBuilder: (context, index) {
+            //                 return Divider(
+            //                   thickness: 1.3,
+            //                 );
+            //               },
+            //               itemCount: trending.readingTrends.length),
+            //       itemCount: trending.readingTrends.length,
+            //     ),
+            //     SizedBox(height: 15.0),
+            //     SuggestionCard(
+            //       child: suggestion.readingSuggestions.length < 1
+            //           ? Center(
+            //               child: Text(
+            //                 'No Suggestions yet!',
+            //                 style: TextStyle(color: Colors.blue),
+            //               ),
+            //             )
+            //           : ListView.separated(
+            //               physics: NeverScrollableScrollPhysics(),
+            //               itemBuilder: (context, index) {
+            //                 return ListTile(
+            //                   leading: CircleAvatar(),
+            //                   title: Text('Axial Warhead'),
+            //                   subtitle: Text('Musa Damu'),
+            //                   trailing: Text('12-03-2020'),
+            //                 );
+            //               },
+            //               separatorBuilder: (context, index) {
+            //                 return Divider(
+            //                   thickness: 1.3,
+            //                 );
+            //               },
+            //               itemCount: suggestion.readingSuggestions.length),
+            //       itemCount: suggestion.readingSuggestions.length,
+            //     ),
+            //
+            //   ],
+            // ),
+            // ),
           ],
         ),
       ),

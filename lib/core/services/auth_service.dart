@@ -3,7 +3,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/models/user_model.dart';
 import 'package:narr/shared/models/api_response_model.dart';
-import 'package:narr/shared/screens/auth_screen/verify_account.dart';
+import 'package:narr/shared/screens/auth_screens/verify_account.dart';
 
 class AuthService {
   late String token;
