@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
-import 'package:narr/shared/screens/auth_screen/login.dart';
+import 'package:narr/shared/screens/auth_screens/login.dart';
 import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/form_card.dart';

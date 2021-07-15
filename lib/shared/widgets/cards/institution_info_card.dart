@@ -43,9 +43,9 @@ class InstitutionoInfoCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  radius: 24,
+                  radius: 30,
                   child: CircleAvatar(
-                    radius: 21,
+                    radius: 28,
                     backgroundColor: Colors.white,
                     backgroundImage: NetworkImage(institutionLogo),
                   ),
@@ -62,7 +62,7 @@ class InstitutionoInfoCard extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                      maxLines: 2,
                     ),
                     Text(
                       '($institutionAcronym)',

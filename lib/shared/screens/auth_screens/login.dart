@@ -3,7 +3,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/admin/admin_layout.dart';
 import 'package:narr/module/researcher/researcher_layout.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/screens/auth_screen/researcher_register.dart';
+import 'package:narr/shared/screens/auth_screens/researcher_register.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/form_card.dart';
 import 'package:narr/shared/widgets/forms/auth_textfield.dart';

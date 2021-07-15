@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:narr/shared/screens/auth_screen/login.dart';
+import 'package:narr/shared/screens/auth_screens/login.dart';
 
 void main() {
   runApp(MyApp());
