@@ -7,6 +7,7 @@ class PrimaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
       padding: EdgeInsets.only(
         top: 15,
         bottom: 15,
