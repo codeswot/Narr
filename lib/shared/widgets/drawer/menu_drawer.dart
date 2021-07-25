@@ -5,6 +5,7 @@ import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth_screens/login.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
+import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -39,10 +40,6 @@ class DrawerItems extends StatelessWidget {
                               context,
                               Dashboard(),
                             );
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(HomeScreen.id);
-                            // Update the state of the app.
-                            // ...
                           },
                         )
                       : Container(),
@@ -236,6 +233,10 @@ class DrawerItems extends StatelessWidget {
                     leading: Icon(FontAwesomeIcons.textWidth),
                     title: Text('Image to Text'),
                     onTap: () {
+                      narrService.routerService.nextRoute(
+                        context,
+                        OCRScreen(),
+                      );
                       // Navigator.of(context).popAndPushNamed(OCRScreen.id);
                       // Update the state of the app.
                       // ...

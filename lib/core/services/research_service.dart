@@ -25,4 +25,25 @@ class ResearchService {
     );
     return data;
   }
+
+  Future getOneResearch(String id) async {
+    dynamic data;
+    await narrService.apiService
+        .getRequest(endpoint: '$narrUrl/research/$id', headers: {
+      'x-token': currentUser.token,
+    }).then(
+      (value) {
+        if (value.statusCode == 200) {
+          var decodedResponse = jsonDecode(value.body);
+          var institutionTypeList = decodedResponse['payload']['research'];
+          data = institutionTypeList;
+        } else {
+          var decodedResponse = jsonDecode(value.body);
+          var errorMessage = decodedResponse['message'];
+          data = errorMessage;
+        }
+      },
+    );
+    return data;
+  }
 }
