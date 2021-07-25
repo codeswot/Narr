@@ -5,6 +5,7 @@ class ServiceInjector {
   ApiService apiService = ApiService();
   AuthService authService = AuthService();
   SocketService socketService = SocketService();
+  UploadService uploadService = UploadService();
 
   //utils services
   DialogInfoService dialogInfoService = DialogInfoService();

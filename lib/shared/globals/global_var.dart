@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:narr/core/state_management/analytics_mobx.dart';
 import 'package:narr/core/state_management/reasearch_mobx.dart';
@@ -7,10 +8,12 @@ import 'package:narr/shared/models/user_model.dart';
 import 'package:narr/shared/themes/colors.dart';
 
 late UserModel currentUser;
+//analytics
 UsersOnline usersOnline = UsersOnline();
 Research research = Research();
 Analytics analytics = Analytics();
 Transaction transaction = Transaction();
+Dio dio = new Dio();
 
 Color determinePrimaryColor(context) {
   if (currentUser.user.userRole == 'researcher') {

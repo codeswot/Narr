@@ -36,6 +36,7 @@ dependencies:
   flutter_tags: ^0.4.9+1
   fluttertoast: ^8.0.7
   argon_buttons_flutter: ^1.1.0
+  clipboard: ^0.1.3
 
 
 #  internet-web-url
