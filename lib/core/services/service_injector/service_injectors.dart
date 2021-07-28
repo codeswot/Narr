@@ -12,6 +12,7 @@ class ServiceInjector {
   RouterService routerService = RouterService();
   InstitutionService institutionService = InstitutionService();
   UtilityService utilityService = UtilityService();
+  PermissionService permissionService = PermissionService();
   //frontend services
 
   //research

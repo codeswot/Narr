@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -57,5 +58,27 @@ class UtilityService {
     }
 
     return pickedSImage;
+  }
+
+  String selectedfile = '';
+  String fileExtension = '';
+  String fileName = '';
+  Future<String> selectDoc({
+    required List<String> allowedExtensions,
+  }) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      onFileLoading: (val) {},
+      type: FileType.custom,
+      allowedExtensions: allowedExtensions,
+    );
+
+    if (result != null) {
+      fileName = result.files.first.name;
+      selectedfile = result.files.first.path!;
+      fileExtension = result.files.first.extension!;
+      print('File Name $selectedfile');
+      print('File Extension: $fileExtension');
+    }
+    return fileExtension;
   }
 }

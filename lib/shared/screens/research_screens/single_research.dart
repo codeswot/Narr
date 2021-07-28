@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
+import 'package:narr/shared/screens/reader/reader.dart';
+import 'package:narr/shared/widgets/buttons/read_button.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 
 class SingleResearch extends StatelessWidget {
@@ -190,9 +192,14 @@ class SingleResearch extends StatelessWidget {
                                   title: 'Read',
                                   id: research.data['_id'],
                                 ),
-                                ReadButton(
-                                  title: 'Bookmark',
-                                  id: research.data['_id'],
+                                GestureDetector(
+                                  onTap: () => narrService.routerService
+                                      .nextRoute(context,
+                                          Reader(research.data['_id'])),
+                                  child: ReadButton(
+                                    title: 'Bookmark',
+                                    id: research.data['_id'],
+                                  ),
                                 ),
                               ],
                             ),
@@ -377,41 +384,3 @@ class SingleResearch extends StatelessWidget {
     );
   }
 }
-
-class ReadButton extends StatelessWidget {
-  const ReadButton({required this.id, required this.title});
-  final String id, title;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) {
-        //       return Reader(id);
-        //     },
-        //   ),
-        // );
-      },
-      child: Container(
-        padding: EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 10),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Color(0xff00a368),
-          ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: Color(0xff00a368),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// contact.data[0]['phone']
