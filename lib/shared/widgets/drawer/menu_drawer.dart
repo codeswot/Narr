@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth_screens/login.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
+import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
 
@@ -152,6 +154,8 @@ class DrawerItems extends StatelessWidget {
                           leading: Icon(Icons.history),
                           title: Text('Reading History'),
                           onTap: () {
+                            narrService.routerService
+                                .nextRoute(context, ReadingHistory());
                             // Navigator.of(context).popAndPushNamed(History.id);
                             // Update the state of the app.
                             // ...
@@ -237,23 +241,20 @@ class DrawerItems extends StatelessWidget {
                         context,
                         OCRScreen(),
                       );
-                      // Navigator.of(context).popAndPushNamed(OCRScreen.id);
-                      // Update the state of the app.
                       // ...
                     },
                   ),
-                  // : Container(),
-                  // (currentUser.userRole == 'researcher')
                   ListTile(
                     leading: Icon(Icons.insert_drive_file),
                     title: Text('Document Conversion'),
                     onTap: () {
-                      // Navigator.of(context).popAndPushNamed(ConvertToPDF.id);
                       // ...
+                      narrService.routerService.nextRoute(
+                        context,
+                        DocumentConvertion(),
+                      );
                     },
                   ),
-                  // : Container(),
-
                   ListTile(
                     leading: Icon(Icons.video_call),
                     title: Text('Video Conferencing'),
@@ -294,8 +295,6 @@ class DrawerItems extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     narrService.socketService.handleLogOutEvent();
-                    // HiveBox().clearToken();
-                    // socket.destroy();
                     narrService.routerService.popUntil(
                       context,
                       Login(),
