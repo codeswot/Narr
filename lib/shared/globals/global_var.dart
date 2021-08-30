@@ -6,6 +6,7 @@ import 'package:narr/core/state_management/transaction_mobx.dart';
 import 'package:narr/core/state_management/users_online_mobx.dart';
 import 'package:narr/shared/models/user_model.dart';
 import 'package:narr/shared/themes/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 late UserModel currentUser;
 //analytics
@@ -28,3 +29,7 @@ Color determinePrimaryColor(context) {
     return NarrColors.royalGreen;
   }
 }
+
+void launchURL(linkUrl) async => await canLaunch(linkUrl)
+    ? await launch(linkUrl)
+    : throw 'Could not launch $linkUrl';

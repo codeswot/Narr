@@ -287,13 +287,20 @@ class _DashboardState extends State<Dashboard> {
             }),
             currentUser.user.userRole == 'researcher'
                 ? ResearchCard(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Container();
-                      },
-                      separatorBuilder: (context, index) => Divider(),
-                      itemCount: 0,
-                    ),
+                    child: research.readingHistoryList.length < 1
+                        ? Center(
+                            child: Text(
+                              'No Readding history yet!',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          )
+                        : ListView.separated(
+                            itemBuilder: (context, index) {
+                              return Container();
+                            },
+                            separatorBuilder: (context, index) => Divider(),
+                            itemCount: 0,
+                          ),
                     cardHeader: 'Reading History',
                     itemCount: 0,
                   )

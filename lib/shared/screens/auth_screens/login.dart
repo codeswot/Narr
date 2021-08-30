@@ -130,6 +130,7 @@ class _LoginState extends State<Login> {
                                   .then((user) {
                                 stopLoading();
                                 currentUser = user; //For now
+
                                 narrService.socketService
                                     .handleLoginEvent(
                                         token: user.token, user: user.user)

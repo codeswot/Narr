@@ -15,6 +15,9 @@ class ServiceInjector {
   PermissionService permissionService = PermissionService();
   //frontend services
 
+  //storage
+  PersistenceStorageService persistenceStorageService =
+      PersistenceStorageService();
   //research
   ResearchService researchService = ResearchService();
 }
