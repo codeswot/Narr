@@ -5,8 +5,11 @@ import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth_screens/login.dart';
 import 'package:narr/shared/screens/dashboard.dart';
+import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
+import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';
+import 'package:narr/shared/screens/third_party_services/ict_works/ictWorks.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
 
@@ -71,15 +74,7 @@ class DrawerItems extends StatelessWidget {
                           leading: Icon(Icons.dashboard),
                           title: Text('Dashboard'),
                           enabled: true,
-                          onTap: () {
-                            // Navigator.of(context).pushReplacementNamed(HomeScreen.id);
-                            // Update the state of the app.
-                            // ...
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(SponsorDashboard.id);
-                            // Navigator.of(context)
-                            //     .popAndPushNamed(SponsorDashboard.id);
-                          },
+                          onTap: () {},
                         )
                       : Container(),
                   (currentUser.user.userRole == 'investor')
@@ -102,9 +97,7 @@ class DrawerItems extends StatelessWidget {
                     leading: Icon(Icons.person),
                     title: Text('Profile'),
                     onTap: () {
-                      // Navigator.of(context).popAndPushNamed(Profile.id);
-                      // Update the state of the app.
-                      // ...
+                      narrService.routerService.nextRoute(context, Profile());
                     },
                   ),
                   ListTile(
@@ -156,9 +149,6 @@ class DrawerItems extends StatelessWidget {
                           onTap: () {
                             narrService.routerService
                                 .nextRoute(context, ReadingHistory());
-                            // Navigator.of(context).popAndPushNamed(History.id);
-                            // Update the state of the app.
-                            // ...
                           },
                         )
                       : Container(),
@@ -181,18 +171,16 @@ class DrawerItems extends StatelessWidget {
                               leading: Icon(FontAwesomeIcons.handHoldingUsd),
                               title: Text('Crowd Funding'),
                               onTap: () {
-                                // ...
-                                // Navigator.of(context)
-                                //     .popAndPushNamed(CrowdFunding.id);
+                                narrService.routerService
+                                    .nextRoute(context, CrowdFunding());
                               },
                             ),
                             ListTile(
                               leading: Icon(FontAwesomeIcons.laptopCode),
                               title: Text('ICT Works'),
                               onTap: () {
-                                // ...
-                                // Navigator.of(context)
-                                //     .popAndPushNamed(IctWorks.id);
+                                narrService.routerService
+                                    .nextRoute(context, IctWorks());
                               },
                             ),
                           ],
@@ -259,9 +247,6 @@ class DrawerItems extends StatelessWidget {
                     leading: Icon(Icons.video_call),
                     title: Text('Video Conferencing'),
                     onTap: () {
-                      // Navigator.of(context)
-                      // .popAndPushNamed(VideoConferenceScreen.id);
-                      // Update the state of the app.
                       // ...
                     },
                   ),

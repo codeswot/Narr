@@ -21,7 +21,18 @@ class AuthService {
       if (loginResponse.statusCode == 200) {
         var decodedData = jsonDecode(loginResponse.body);
         var payLoad = decodedData["payload"];
+
         UserModel user = UserModel.fromJson(payLoad);
+
+        Map<String, dynamic> userObj =
+            Map<String, dynamic>.from(payLoad['user']);
+        String token = payLoad['token'];
+
+        narrService.persistenceStorageService.saveItemToLocalStorage(
+            storageName: 'local_token', itemBox: 'token', item: token);
+        narrService.persistenceStorageService.saveItemToLocalStorage(
+            storageName: 'local_user', itemBox: 'user', item: userObj);
+
         return user;
       } else {
         var data = jsonDecode(loginResponse.body);
