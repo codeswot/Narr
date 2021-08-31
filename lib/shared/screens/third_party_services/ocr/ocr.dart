@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/uploadOcr.dart';
 import 'package:narr/shared/widgets/cards/ocr_card.dart';
@@ -109,14 +110,19 @@ class _OCRScreenState extends State<OCRScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                child: Text(
-                  'Select Picture Upload Method',
-                  style: TextStyle(
-                    color: Color(0xff00a368),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+              Container(
+                height: 100,
+                child: SvgPicture.asset(
+                  'assets/svg/ocr.svg',
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Text(
+                'Select Picture Upload Method',
+                style: TextStyle(
+                  color: Color(0xff00a368),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
               SizedBox(height: 15),

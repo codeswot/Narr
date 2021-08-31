@@ -49,26 +49,6 @@ class _AllResearchState extends State<AllResearch> {
               ),
             ],
           ),
-          // child: DropdownButtonFormField<dynamic>(
-          //   decoration: InputDecoration(
-          //     border: UnderlineInputBorder(
-          //       borderSide: BorderSide.none,
-          //     ),
-          //   ),
-          //   hint: Padding(
-          //     padding: const EdgeInsets.only(left: 8.0),
-          //     child: Text(
-          //       'By Category',
-          //       style: TextStyle(color: Colors.grey[700]),
-          //     ),
-          //   ),
-          //   // items: _dropdownHelper.getFilterDropdownItems(),
-          //   // onChanged: (value) {
-          //   //   setState(() {
-          //   //     _dropdownHelper.selectedFilter = value;
-          //   //   });
-          //   // },
-          // ),
         ),
       ),
       SizedBox(
