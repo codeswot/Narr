@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:narr/shared/screens/splash_screen.dart';
-import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff00a368),
         primarySwatch: Colors.green,
       ),
-      home: CrowdFunding(),
+      home: SplashScreen(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/screens/third_party_services/ict_works/ictWorks_content.dart';
 import 'package:narr/shared/widgets/cards/outlined_card.dart';
@@ -26,7 +27,20 @@ class _IctWorksState extends State<IctWorks> {
             } else if (snapshot.hasError) {
               print('${snapshot.error}');
             } else if (!snapshot.hasData) {
-              return Text('No Data');
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    child: SvgPicture.asset('assets/svg/no_data.svg'),
+                  ),
+                  Text(
+                    'No Data',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ],
+              );
             } else if (snapshot.hasData) {
               print(data);
               return ListView.separated(
@@ -60,7 +74,20 @@ class _IctWorksState extends State<IctWorks> {
                 },
               );
             } else {
-              return Text('No Data');
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    child: SvgPicture.asset('assets/svg/no_data.svg'),
+                  ),
+                  Text(
+                    'No Data',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ],
+              );
             }
             return Text('${snapshot.error}');
           },

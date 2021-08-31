@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
@@ -109,7 +110,12 @@ class _DocumentConvertionState extends State<DocumentConvertion> {
                   ],
                 ),
                 SizedBox(height: 10),
-                Image.asset('assets/images/png/document.png'),
+                Container(
+                  height: 300,
+                  child: SvgPicture.asset(
+                    'assets/svg/document.svg',
+                  ),
+                ),
                 flag
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,

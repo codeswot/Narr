@@ -13,16 +13,6 @@ class ResearchCard extends StatelessWidget {
   final int itemCount;
   @override
   Widget build(BuildContext context) {
-    double height = 40;
-    if (itemCount == 1) {
-      height = 90;
-    } else if (itemCount == 2) {
-      height = 150;
-    } else if (itemCount >= 3) {
-      height = 250;
-    } else {
-      height = 40;
-    }
     return PrimaryCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,12 +35,9 @@ class ResearchCard extends StatelessWidget {
             ],
           ),
           Divider(thickness: 1.2),
-          SizedBox(height: 15),
           Container(
-            // ignore: unnecessary_null_comparison
-            height: (itemCount != null) ? height : 10,
-            // ignore: unnecessary_null_comparison
-            child: (child != null) ? child : Container(),
+            height: 200,
+            child: child,
           )
         ],
       ),

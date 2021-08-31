@@ -59,13 +59,6 @@ class DrawerItems extends StatelessWidget {
                               context,
                               Dashboard(),
                             );
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(AdminDashBoard.id);
-                            // Update the state of the app.
-                            // ...
-
-                            // Navigator.of(context)
-                            //     .popAndPushNamed(AdminDashBoard.id);
                           },
                         )
                       : Container(),
@@ -82,15 +75,7 @@ class DrawerItems extends StatelessWidget {
                           leading: Icon(Icons.dashboard),
                           title: Text('Dashboard'),
                           enabled: true,
-                          onTap: () {
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(InvestorDashboard.id);
-                            // Update the state of the app.
-                            // ...
-
-                            // Navigator.of(context)
-                            //     .popAndPushNamed(InvestorDashboard.id);
-                          },
+                          onTap: () {},
                         )
                       : Container(),
                   ListTile(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 
@@ -11,12 +10,10 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
-    // print(onlineUsers.numberOfUsersOnline);
     DateTime date = currentUser.user.lastLoggedIn;
     DateTime localDate = date.toLocal();
     String dateSlug =
         "${localDate.year.toString()}-${localDate.month.toString().padLeft(2, '0')}-${localDate.day.toString().padLeft(2, '0')}, ${localDate.hour}:${localDate.minute}";
-    // print(dateSlug);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -41,15 +38,16 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(left: 15),
                 child: Column(
                   children: [
                     Container(
+                      margin: EdgeInsets.only(left: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundImage: AssetImage('images/profile.jpg'),
+                            backgroundImage:
+                                AssetImage('assets/images/jpg/profile.jpg'),
                             radius: 45.0,
                           ),
                           SizedBox(
@@ -115,7 +113,7 @@ class _ProfileState extends State<Profile> {
                             child: Column(
                               children: [
                                 Icon(Icons.history, size: 30),
-                                Text('Transaction History'),
+                                Text('Txn History'),
                               ],
                             ),
                           ),
@@ -139,8 +137,7 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 32.0),
-                    Container(
+                    PrimaryCard(
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -166,9 +163,7 @@ class _ProfileState extends State<Profile> {
                             children: <Widget>[
                               CircleAvatar(
                                 radius: 15,
-                                foregroundImage: NetworkImage(
-                                  '$baseUrl${currentUser.user.institution.logo}',
-                                ),
+                                child: Icon(Icons.school, size: 20.0),
                               ),
                               SizedBox(
                                 width: 4.0,
@@ -180,6 +175,7 @@ class _ProfileState extends State<Profile> {
                               ),
                             ],
                           ),
+                          SizedBox(height: 10.0),
                           Row(
                             children: <Widget>[
                               CircleAvatar(
@@ -267,9 +263,6 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
               Observer(builder: (_) {
                 return PrimaryCard(
                   child: Column(
@@ -309,7 +302,7 @@ class _ProfileState extends State<Profile> {
                             onTap: () {},
                             child: Users(
                               name: '$onlineUserfullName',
-                              userImage: 'images/profile.jpg',
+                              userImage: 'assets/images/jpg/profile.jpg',
                               institution: '',
                             ),
                           );

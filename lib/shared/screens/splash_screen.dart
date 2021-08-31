@@ -2,10 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
-import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/models/user_model.dart';
 import 'package:narr/shared/screens/auth_screens/login.dart';
-import 'package:narr/shared/screens/dashboard.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

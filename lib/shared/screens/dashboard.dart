@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/shared/screens/profile.dart';
+import 'package:narr/shared/screens/research_screens/single_research.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/header_card.dart';
@@ -36,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
               Icons.account_circle,
             ),
             onPressed: () {
-              // Navigator.of(context).pushNamed(Profile.id);
+              narrService.routerService.nextRoute(context, Profile());
             },
           ),
           IconButton(
@@ -179,6 +184,199 @@ class _DashboardState extends State<Dashboard> {
                 },
               );
             }),
+            currentUser.user.userRole == 'researcher'
+                ? ResearchCard(
+                    child: Observer(
+                      builder: (_) {
+                        return research.readingHistoryList.length < 1
+                            ? Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      child: SvgPicture.asset(
+                                          'assets/svg/no_data.svg'),
+                                    ),
+                                    Text(
+                                      'No Reading History yet!',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    var researchHistory =
+                                        research.readingHistoryList[index];
+                                    return ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: CircleAvatar(
+                                        child: Icon(Icons.insert_drive_file),
+                                      ),
+                                      title: Text(
+                                        '${researchHistory['researchTitle']}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      subtitle: Text(
+                                        '${researchHistory['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      trailing: CircularPercentIndicator(
+                                        radius: 40.0,
+                                        lineWidth: 4.0,
+                                        percent: 0.7,
+                                        center: Text('70%'),
+                                        progressColor: Colors.green,
+                                      ),
+                                      onTap: () {
+                                        narrService.routerService.nextRoute(
+                                          context,
+                                          SingleResearch(
+                                            researchId: researchHistory['_id'],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      Divider(),
+                                  itemCount: research.readingHistoryList.length,
+                                ),
+                              );
+                      },
+                    ),
+                    cardHeader: 'Reading History',
+                    itemCount: research.readingHistoryList.length,
+                  )
+                : Container(),
+            currentUser.user.userRole == 'researcher'
+                ? ResearchCard(
+                    child: Observer(
+                      builder: (_) {
+                        return research.suggestionList.length < 1
+                            ? Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      child: SvgPicture.asset(
+                                          'assets/svg/no_data.svg'),
+                                    ),
+                                    Text(
+                                      'No Suggestion yet!',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    var researchSuggestion =
+                                        research.suggestionList[index];
+                                    return ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: CircleAvatar(
+                                        child: Icon(Icons.insert_drive_file),
+                                      ),
+                                      title: Text(
+                                        '${researchSuggestion['researchTitle']}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      subtitle: Text(
+                                        '${researchSuggestion['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
+                                      ),
+                                      trailing: Column(
+                                        children: [
+                                          Text(
+                                              '${researchSuggestion['accessType']}'),
+                                          SizedBox(height: 5),
+                                          Text(
+                                              '${researchSuggestion['nPages']}')
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      Divider(),
+                                  itemCount: research.suggestionList.length,
+                                ),
+                              );
+                      },
+                    ),
+                    cardHeader: 'Reading Suggestion',
+                    itemCount: research.suggestionList.length,
+                  )
+                : Container(),
+            currentUser.user.userRole == 'researcher'
+                ? ResearchCard(
+                    child: Observer(
+                      builder: (_) {
+                        return research.trendingList.length < 1
+                            ? Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      child: SvgPicture.asset(
+                                          'assets/svg/no_data.svg'),
+                                    ),
+                                    Text(
+                                      'No Trending research yet!',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    var trendingResearch =
+                                        research.trendingList[index];
+                                    return ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: CircleAvatar(
+                                        child: Icon(Icons.insert_drive_file),
+                                      ),
+                                      title: Text(
+                                        '${trendingResearch['researchTitle']}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      subtitle: Text(
+                                        '${trendingResearch['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
+                                      ),
+                                      trailing: Column(
+                                        children: [
+                                          Text(
+                                              '${trendingResearch['accessType']}'),
+                                          SizedBox(height: 5),
+                                          Text('${trendingResearch['nPages']}')
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      Divider(),
+                                  itemCount: 0,
+                                ),
+                              );
+                      },
+                    ),
+                    cardHeader: 'Trending',
+                    itemCount: 0,
+                  )
+                : Container(),
             Observer(builder: (_) {
               return PrimaryCard(
                 child: Column(
@@ -285,189 +483,6 @@ class _DashboardState extends State<Dashboard> {
                 ),
               );
             }),
-            currentUser.user.userRole == 'researcher'
-                ? ResearchCard(
-                    child: research.readingHistoryList.length < 1
-                        ? Center(
-                            child: Text(
-                              'No Readding history yet!',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                          )
-                        : ListView.separated(
-                            itemBuilder: (context, index) {
-                              return Container();
-                            },
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: 0,
-                          ),
-                    cardHeader: 'Reading History',
-                    itemCount: 0,
-                  )
-                : Container(),
-
-            currentUser.user.userRole == 'researcher'
-                ? ResearchCard(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Container();
-                      },
-                      separatorBuilder: (context, index) => Divider(),
-                      itemCount: 0,
-                    ),
-                    cardHeader: 'Reading Suggestion',
-                    itemCount: 0,
-                  )
-                : Container(),
-
-            currentUser.user.userRole == 'researcher'
-                ? ResearchCard(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Container();
-                      },
-                      separatorBuilder: (context, index) => Divider(),
-                      itemCount: 0,
-                    ),
-                    cardHeader: 'Trending',
-                    itemCount: 0,
-                  )
-                : Container(),
-
-            // Analytics(
-            //   chartWidget: chartWidget,
-            //   title: '',
-            //   child: Container(),
-            // ),
-            //     ReadingHistoryCard(
-            //       child: readingHistory.readingHistoryDocument.length < 1
-            //           ? Center(
-            //               child: Text(
-            //                 'No Readding history yet!',
-            //                 style: TextStyle(color: Colors.blue),
-            //               ),
-            //             )
-            //           : ListView.separated(
-            //               physics: NeverScrollableScrollPhysics(),
-            //               itemCount:
-            //                   readingHistory.readingHistoryDocument.length,
-            //               separatorBuilder:
-            //                   (BuildContext context, int index) => Divider(),
-            //               itemBuilder: (context, index) {
-            //                 return ListTile(
-            //                   contentPadding: EdgeInsets.zero,
-            //                   leading: CircleAvatar(
-            //                     child: Icon(Icons.insert_drive_file),
-            //                   ),
-            //                   title: Text(
-            //                     '${readingHistory.readingHistoryDocument[index]['researchTitle']}',
-            //                     maxLines: 1,
-            //                     overflow: TextOverflow.ellipsis,
-            //                   ),
-            //                   subtitle: Text(
-            //                     '${readingHistory.readingHistoryDocument[index]['authors'].toString().replaceAll('[', '').replaceAll(']', '')}',
-            //                     maxLines: 1,
-            //                     overflow: TextOverflow.ellipsis,
-            //                   ),
-            //                   trailing: Column(
-            //                     mainAxisAlignment: MainAxisAlignment.end,
-            //                     children: [
-            //                       Text(
-            //                           '${readingHistory.readingHistoryDocument[index]['accessType']},'),
-            //                       SizedBox(
-            //                         height: 8,
-            //                       ),
-            //                       Text(
-            //                         '${readingHistory.readingHistoryDocument[index]['nPages']}',
-            //                         style: TextStyle(
-            //                           color: Color(0xff00a368),
-            //                         ),
-            //                       ),
-            //                     ],
-            //                   ),
-            //                   onTap: () {
-            //                     Navigator.push(
-            //                       context,
-            //                       MaterialPageRoute(
-            //                         builder: (context) => ResearchWork(
-            //                           researchId: readingHistory
-            //                                   .readingHistoryDocument[index]
-            //                               ['_id'],
-            //                         ),
-            //                       ),
-            //                     );
-            //                   },
-            //                 );
-            //               },
-            //             ),
-            //       itemCount: readingHistory.readingHistoryDocument.length,
-            //     ),
-            //     SizedBox(
-            //       height: 15,
-            //     ),
-            //     TrendinCard(
-            //       child: trending.readingTrends.length < 1
-            //           ? Center(
-            //               child: Text(
-            //                 'No Trends yet!',
-            //                 style: TextStyle(color: Colors.blue),
-            //               ),
-            //             )
-            //           : ListView.separated(
-            //               physics: NeverScrollableScrollPhysics(),
-            //               itemBuilder: (context, index) {
-            //                 return ListTile(
-            //                   leading: CircleAvatar(
-            //                     child: Icon(
-            //                       Icons.insert_drive_file,
-            //                       color: Colors.white,
-            //                     ),
-            //                     backgroundColor: Colors.blue,
-            //                   ),
-            //                   title: Text('Linial Warhead'),
-            //                   subtitle: Text('Musa Damu'),
-            //                   trailing: Text('12-03-2020'),
-            //                 );
-            //               },
-            //               separatorBuilder: (context, index) {
-            //                 return Divider(
-            //                   thickness: 1.3,
-            //                 );
-            //               },
-            //               itemCount: trending.readingTrends.length),
-            //       itemCount: trending.readingTrends.length,
-            //     ),
-            //     SizedBox(height: 15.0),
-            //     SuggestionCard(
-            //       child: suggestion.readingSuggestions.length < 1
-            //           ? Center(
-            //               child: Text(
-            //                 'No Suggestions yet!',
-            //                 style: TextStyle(color: Colors.blue),
-            //               ),
-            //             )
-            //           : ListView.separated(
-            //               physics: NeverScrollableScrollPhysics(),
-            //               itemBuilder: (context, index) {
-            //                 return ListTile(
-            //                   leading: CircleAvatar(),
-            //                   title: Text('Axial Warhead'),
-            //                   subtitle: Text('Musa Damu'),
-            //                   trailing: Text('12-03-2020'),
-            //                 );
-            //               },
-            //               separatorBuilder: (context, index) {
-            //                 return Divider(
-            //                   thickness: 1.3,
-            //                 );
-            //               },
-            //               itemCount: suggestion.readingSuggestions.length),
-            //       itemCount: suggestion.readingSuggestions.length,
-            //     ),
-            //
-            //   ],
-            // ),
-            // ),
           ],
         ),
       ),
