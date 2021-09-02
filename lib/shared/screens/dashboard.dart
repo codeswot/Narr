@@ -390,8 +390,7 @@ class _DashboardState extends State<Dashboard> {
                         AnalyticsCard(
                           title: 'Latest Block',
                           count:
-                              '${analytics.blockchainAnalytics == null ? '0' : analytics.blockchainAnalytics['number']}',
-                          color: Colors.blue,
+                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['number']}',
                           icon: FontAwesomeIcons.thLarge,
                           onTap: () {},
                           info: '',
@@ -399,8 +398,7 @@ class _DashboardState extends State<Dashboard> {
                         AnalyticsCard(
                           title: 'Difficulty',
                           count:
-                              '${analytics.blockchainAnalytics == null ? '0' : analytics.blockchainAnalytics['difficulty']}',
-                          color: Colors.blue,
+                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['difficulty']}',
                           icon: FontAwesomeIcons.chartLine,
                           info: '',
                           onTap: () {},
@@ -415,16 +413,14 @@ class _DashboardState extends State<Dashboard> {
                           title: 'Gas Used',
                           info: '',
                           count:
-                              '${analytics.blockchainAnalytics == null ? '0' : analytics.blockchainAnalytics['gasUsed']}',
-                          color: Colors.blue,
+                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasUsed']}',
                           icon: FontAwesomeIcons.gasPump,
                           onTap: () {},
                         ),
                         AnalyticsCard(
                           title: 'Gas Limit',
                           count:
-                              '${analytics.blockchainAnalytics == null ? '0' : analytics.blockchainAnalytics['gasLimit']}',
-                          color: Colors.blue,
+                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasLimit']}',
                           icon: FontAwesomeIcons.gasPump,
                           onTap: () {},
                           info: '',
@@ -439,7 +435,6 @@ class _DashboardState extends State<Dashboard> {
                           title: 'Txn(from)',
                           count:
                               '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['from']}',
-                          color: Colors.blue,
                           icon: Icons.north_east,
                           onTap: () {},
                           info: '',
@@ -448,7 +443,6 @@ class _DashboardState extends State<Dashboard> {
                           title: 'Txn(to)',
                           count:
                               '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['to']}',
-                          color: Colors.blue,
                           icon: Icons.south_west,
                           info: '',
                           onTap: () {},
@@ -464,7 +458,6 @@ class _DashboardState extends State<Dashboard> {
                           info: '',
                           count:
                               '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['value']}',
-                          color: Colors.blue,
                           icon: FontAwesomeIcons.ethereum,
                           onTap: () {},
                         ),
@@ -472,7 +465,6 @@ class _DashboardState extends State<Dashboard> {
                           title: 'Nonce',
                           count:
                               '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['nonce']}',
-                          color: Colors.blue,
                           icon: FontAwesomeIcons.gasPump,
                           onTap: () {},
                           info: '',

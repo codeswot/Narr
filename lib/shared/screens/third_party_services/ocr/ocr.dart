@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/uploadOcr.dart';
+import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/cards/ocr_card.dart';
 
 class OCRScreen extends StatefulWidget {
@@ -81,13 +82,13 @@ class _OCRScreenState extends State<OCRScreen> {
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Colors.black,
+          color: NarrColors.royalGreen,
         ),
         backgroundColor: Colors.white,
         title: Text(
           'OCR',
           style: TextStyle(
-            color: Colors.black,
+            color: NarrColors.royalGreen,
             fontWeight: FontWeight.bold,
           ),
         ),

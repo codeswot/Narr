@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:narr/shared/themes/colors.dart';
 
 class AnalyticsCard extends StatelessWidget {
   const AnalyticsCard(
       {required this.title,
       required this.count,
       required this.onTap,
-      required this.color,
+      this.color = NarrColors.royalGreen,
       required this.icon,
       required this.info});
   final String title;
@@ -43,11 +44,12 @@ class AnalyticsCard extends StatelessWidget {
               children: [
                 SizedBox(width: 5),
                 CircleAvatar(
-                  radius: 18,
+                  radius: 20,
                   backgroundColor: color,
                   child: Icon(
                     icon,
                     color: Colors.white,
+                    size: 20,
                   ),
                 ),
                 SizedBox(width: 2),

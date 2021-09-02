@@ -1,7 +1,9 @@
 // import 'package:clipboard/clipboard.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:clipboard/clipboard.dart';
 
@@ -25,26 +27,27 @@ class _OcrResultState extends State<OcrResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: NarrColors.royalGreen,
+        ),
+        title: Text(
+          'Result',
+          style: TextStyle(color: NarrColors.royalGreen),
+        ),
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 15,
               ),
-              Text(
-                'Result',
-                style: TextStyle(
-                  color: Color(0xff00a368),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'assets/images/png/ocr.png',
-                  fit: BoxFit.fill,
+              Container(
+                height: 100,
+                child: SvgPicture.asset(
+                  'assets/svg/ocr.svg',
                 ),
               ),
               SizedBox(height: 15),

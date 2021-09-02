@@ -79,6 +79,37 @@ class UtilityService {
       print('File Name $selectedfile');
       print('File Extension: $fileExtension');
     }
-    return fileExtension;
+    return fileName;
+  }
+
+  num amountFormarter(String ammount) {
+    bool startsWithCurrency = ammount.startsWith('₦');
+    bool startsWithNarr = ammount.startsWith('Narr');
+
+    if (startsWithCurrency || startsWithNarr) {
+      String removeCurrency = ammount.replaceAll('₦', '');
+      print('$ammount ==> $removeCurrency');
+      String removeDot = removeCurrency.replaceAll('.', '');
+      String removedComma = removeDot.replaceAll(',', '');
+      String finalAmountFormart = removedComma.replaceAll('Narr', '');
+
+      print('$removeCurrency ==> $finalAmountFormart');
+      int _finalAmout = int.parse(finalAmountFormart);
+      return _finalAmout;
+    } else {
+      return 0;
+    }
+  }
+
+  String convertToNarrCoin(num naira) {
+    num value = naira / 1000000;
+    final String finalValue = value.toString();
+    return finalValue;
+  }
+
+  String convertToNaira(num naira) {
+    num value = naira * 100;
+    final String finalValue = value.toString();
+    return finalValue;
   }
 }
