@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -22,7 +23,6 @@ class UploadService {
       "image": await MultipartFile.fromFile(
         selectedfile,
         filename: basename(selectedfile),
-        // contentType: MediaType.parse('text/plain'),
       ),
     });
     try {
@@ -38,7 +38,7 @@ class UploadService {
 
       if (response.statusCode == 200) {
         print('response ${response.toString()}');
-        narrService.routerService.popUntil(
+        narrService.routerService.popReplaceRoute(
           context,
           OcrResult(
             response: response,
@@ -123,6 +123,39 @@ class UploadService {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  //research Upload
+  Future researchUpload(
+      {required String url, required Map<String, dynamic> requestBody}) async {
+    FormData data = FormData.fromMap(requestBody);
+    try {
+      Response response = await Dio().post(
+        url.toString(),
+        data: data,
+        onSendProgress: (int sent, int total) {
+          print('$sent / $total');
+        },
+        options: Options(
+          followRedirects: false,
+          validateStatus: (status) => true,
+          headers: {'Accept': 'text/plain', 'x-token': '${currentUser.token}'},
+        ),
+      );
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.toString());
+        print(data);
+        return data;
+      } else {
+        var data = jsonDecode(response.toString());
+        narrService.dialogInfoService.showToast('${data['message']}');
+        print(data);
+        return data;
+      }
+    } catch (err) {
+      print('research upload error >> $err');
+      narrService.dialogInfoService.showToast(err.toString());
     }
   }
 }

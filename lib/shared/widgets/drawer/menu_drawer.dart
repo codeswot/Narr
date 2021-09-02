@@ -4,6 +4,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth_screens/login.dart';
+import 'package:narr/shared/screens/blockchain/payment_info_screen.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
@@ -178,9 +179,11 @@ class DrawerItems extends StatelessWidget {
                         leading: Icon(FontAwesomeIcons.wallet),
                         title: Text('Wallet'),
                         onTap: () {
-                          // // ...
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => PaymentInfoScreen()),);
+                          // ...
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => PaymentInfoScreen()),
+                          );
                         },
                       ),
                       ListTile(

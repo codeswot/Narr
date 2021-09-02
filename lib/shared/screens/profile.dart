@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:narr/shared/globals/global_var.dart';
+import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
+
+import 'blockchain/payment_info_screen.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -84,16 +87,16 @@ class _ProfileState extends State<Profile> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // print('tap');
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //   builder: (context) => PaymentInfoScreen(),
-                              // ));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PaymentInfoScreen(),
+                              ));
                             },
                             child: Column(
                               children: [
                                 Icon(
                                   Icons.account_balance_wallet,
                                   size: 30,
+                                  color: NarrColors.royalGreen,
                                 ),
                                 Text('Wallet'),
                               ],
@@ -112,8 +115,12 @@ class _ProfileState extends State<Profile> {
                             },
                             child: Column(
                               children: [
-                                Icon(Icons.history, size: 30),
-                                Text('Txn History'),
+                                Icon(
+                                  Icons.account_balance,
+                                  size: 30,
+                                  color: NarrColors.royalGreen,
+                                ),
+                                Text('Bank info'),
                               ],
                             ),
                           ),
@@ -129,7 +136,11 @@ class _ProfileState extends State<Profile> {
                             },
                             child: Column(
                               children: [
-                                Icon(Icons.person, size: 30),
+                                Icon(
+                                  Icons.person,
+                                  size: 30,
+                                  color: NarrColors.royalGreen,
+                                ),
                                 Text('Personal info'),
                               ],
                             ),

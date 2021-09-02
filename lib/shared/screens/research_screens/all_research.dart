@@ -3,6 +3,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
+import 'package:narr/shared/screens/research_screens/upload_research.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
 
@@ -119,9 +120,8 @@ class _AllResearchState extends State<AllResearch> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        // backgroundColor: Color(0xff00a368),
         onPressed: () {
-          // Navigator.of(context).pushNamed(SingleFileUpload.id);
+          narrService.routerService.nextRoute(context, ResearchUpload());
         },
         label: Text('Upload Research'),
         icon: Icon(Icons.add),
