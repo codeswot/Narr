@@ -2,6 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/shared/screens/blockchain/wallet/cashout.dart';
 import 'package:narr/shared/screens/blockchain/wallet/fund_wallet.dart';
 import 'package:narr/shared/screens/blockchain/wallet/transfer.dart';
 import 'package:narr/shared/themes/colors.dart';
@@ -23,7 +24,6 @@ class WalletTab extends StatefulWidget {
 class _WalletTabState extends State<WalletTab> {
   String payStackKey = 'pk_test_b448c10aa89a7654b88480a95b1d787e9f3f61c3';
 
-  TextEditingController cashout = TextEditingController();
   TextEditingController transferAmount = TextEditingController();
   TextEditingController transferRecipient = TextEditingController();
 
@@ -114,6 +114,9 @@ class _WalletTabState extends State<WalletTab> {
                   SizedBox(width: 5),
                   Expanded(
                     child: InkWell(
+                      onTap: () {
+                        narrService.routerService.nextRoute(context, Cashout());
+                      },
                       child: WalletCard(
                         icon: Icons.attach_money,
                         color: NarrColors.royalGreen,
@@ -270,47 +273,6 @@ class _WalletTabState extends State<WalletTab> {
                     ],
                   ),
                 ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Container(
-              child: PrimaryCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Cashout/withdraw'),
-                    SizedBox(height: 7),
-                    Divider(thickness: 0.8),
-                    Text('Ammount(Tokens)'),
-                    TextField(
-                      controller: cashout,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        CurrencyTextInputFormatter(
-                          symbol: 'Narr',
-                          // decimalDigits: 1,
-                        ),
-                      ],
-                      onChanged: (val) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
-                        hintText: '0',
-                      ),
-                    ),
-                    Text(
-                        '${narrService.utilityService.convertToNaira(narrService.utilityService.amountFormarter(cashout.text))} Naira'),
-                    SizedBox(height: 15),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: PrimaryRaisedButton(
-                        buttonTitle: 'Cashout',
-                        onTap: (startLaoding, stop, btnState) {},
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             SizedBox(height: 15),

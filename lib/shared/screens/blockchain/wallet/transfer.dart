@@ -1,4 +1,3 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
@@ -16,6 +15,8 @@ class Transfer extends StatefulWidget {
 }
 
 class _TransferState extends State<Transfer> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController amount = TextEditingController();
   TextEditingController recipient = TextEditingController();
 
@@ -40,53 +41,59 @@ class _TransferState extends State<Transfer> {
             SizedBox(height: 15),
             Container(
               child: PrimaryCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Transfer Tokens',
-                      style: TextStyle(color: NarrColors.royalGreen),
-                    ),
-                    SizedBox(height: 7),
-                    Divider(thickness: 0.8),
-                    Text('Recipient Email (Narr Email)'),
-                    SizedBox(height: 3),
-                    TextField(
-                      controller: recipient,
-                      decoration: InputDecoration(
-                        filled: true,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Transfer Tokens',
+                        style: TextStyle(color: NarrColors.royalGreen),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Text('Amount(Tokens)'),
-                    SizedBox(height: 3),
-                    TextField(
-                      controller: amount,
-                      keyboardType: TextInputType.number,
-                      onChanged: (val) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
+                      SizedBox(height: 7),
+                      Divider(thickness: 0.8),
+                      Text('Recipient Email (Narr Email)'),
+                      SizedBox(height: 3),
+                      TextField(
+                        controller: recipient,
+                        decoration: InputDecoration(
+                          filled: true,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: PrimaryRaisedButton(
-                        buttonTitle: 'Continue',
-                        onTap: (start, stop, btnState) {
-                          narrService.routerService.nextRoute(
-                            context,
-                            ConfirmTransfer(
-                              amountToken: amount.text,
-                              recipient: recipient.text,
-                            ),
-                          );
+                      SizedBox(height: 15),
+                      Text('Amount(Tokens)'),
+                      SizedBox(height: 3),
+                      TextField(
+                        controller: amount,
+                        keyboardType: TextInputType.number,
+                        onChanged: (val) {
+                          setState(() {});
                         },
+                        decoration: InputDecoration(
+                          filled: true,
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 15),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: PrimaryRaisedButton(
+                          buttonTitle: 'Continue',
+                          onTap: (start, stop, btnState) {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              narrService.routerService.nextRoute(
+                                context,
+                                ConfirmTransfer(
+                                  amountToken: amount.text,
+                                  recipient: recipient.text,
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
