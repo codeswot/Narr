@@ -9,6 +9,9 @@ import 'package:narr/shared/themes/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 late UserModel currentUser;
+//for test purpose
+String publicKey = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh';
+
 //analytics
 UsersOnline usersOnline = UsersOnline();
 Research research = Research();

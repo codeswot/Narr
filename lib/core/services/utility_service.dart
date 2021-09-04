@@ -82,7 +82,7 @@ class UtilityService {
     return fileName;
   }
 
-  num amountFormarter(String ammount) {
+  int amountFormarter(String ammount) {
     bool startsWithCurrency = ammount.startsWith('₦');
     bool startsWithNarr = ammount.startsWith('Narr');
 

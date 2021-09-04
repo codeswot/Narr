@@ -1,4 +1,3 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
@@ -9,6 +8,7 @@ import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/wallet_card.dart';
+import 'package:narr/shared/globals/global_var.dart';
 
 // import 'package:flutter_paystack/flutter_paystack.dart';
 
@@ -22,12 +22,9 @@ class WalletTab extends StatefulWidget {
 }
 
 class _WalletTabState extends State<WalletTab> {
-  String payStackKey = 'pk_test_b448c10aa89a7654b88480a95b1d787e9f3f61c3';
-
   TextEditingController transferAmount = TextEditingController();
   TextEditingController transferRecipient = TextEditingController();
 
-  String address = 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh';
   @override
   void initState() {
     _initPayStack();
@@ -168,7 +165,7 @@ class _WalletTabState extends State<WalletTab> {
                           Text('Address: '),
                           Flexible(
                             child: Text(
-                              address.toLowerCase(),
+                              publicKey.toLowerCase(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
