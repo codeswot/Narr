@@ -14,19 +14,12 @@ class FundWallet extends StatefulWidget {
 }
 
 class _FundWalletState extends State<FundWallet> {
-  TextEditingController fundController = TextEditingController();
-  _charge(context, {required num ammount}) async {
-    // Charge charge = Charge()
-    //   ..amount = ammount
-    //   ..reference = 'test2'
-    //   // or ..accessCode = _getAccessCodeFrmInitialization()
-    //   ..email = 'elmubarak333@gmail.com';
-    // CheckoutResponse response = await PaystackPlugin.checkout(
-    //   context,
-    //   method: CheckoutMethod.card,
-    //   charge: charge,
-    // );
-    // print(response.status);
+  TextEditingController amount = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    narrService.paymentService.initPaystack();
   }
 
   @override
@@ -57,10 +50,10 @@ class _FundWalletState extends State<FundWallet> {
                   ),
                   SizedBox(height: 7),
                   Divider(thickness: 0.8),
-                  Text('Ammount(Naira)'),
+                  Text('Amount(Naira)'),
                   SizedBox(height: 8),
                   TextField(
-                    controller: fundController,
+                    controller: amount,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       CurrencyTextInputFormatter(
@@ -78,7 +71,7 @@ class _FundWalletState extends State<FundWallet> {
                   ),
                   SizedBox(height: 3),
                   Text(
-                    '${narrService.utilityService.convertToNarrCoin(narrService.utilityService.amountFormarter(fundController.text))} Narr coin',
+                    '${narrService.utilityService.convertToNarrCoin(narrService.utilityService.amountFormarter(amount.text))} Narr coin',
                   ),
                   SizedBox(height: 15),
                   Align(
@@ -86,9 +79,25 @@ class _FundWalletState extends State<FundWallet> {
                     child: PrimaryRaisedButton(
                       buttonTitle: 'Fund',
                       onTap: (startLoading, stopLoading, btnState) {
-                        final num _currentAmount = narrService.utilityService
-                            .amountFormarter(fundController.text);
-                        _charge(context, ammount: _currentAmount);
+                        if (amount.text.isNotEmpty) {
+                          startLoading();
+                          final int _currentAmount = narrService.utilityService
+                              .amountFormarter(amount.text);
+                          narrService.paymentService
+                              .makePayment(
+                                  amount: _currentAmount, context: context)
+                              .then((value) {
+                            setState(() {
+                              amount.clear();
+                            });
+                            stopLoading();
+                            narrService.dialogInfoService
+                                .showToast('Wallet funded successfully');
+                          });
+                        } else {
+                          narrService.dialogInfoService
+                              .showToast('Please Enter an Amount');
+                        }
                       },
                     ),
                   ),

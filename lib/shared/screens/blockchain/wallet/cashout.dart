@@ -2,7 +2,6 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
-import 'package:narr/shared/themes/colors.dart';
 
 import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
@@ -15,8 +14,6 @@ class Cashout extends StatefulWidget {
 }
 
 class _CashoutState extends State<Cashout> {
-  final _formKey = GlobalKey<FormState>();
-
   TextEditingController cashout = TextEditingController();
 
   @override

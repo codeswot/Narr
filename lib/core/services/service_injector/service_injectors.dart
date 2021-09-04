@@ -20,6 +20,9 @@ class ServiceInjector {
       PersistenceStorageService();
   //research
   ResearchService researchService = ResearchService();
+
+  //payment
+  PaymentService paymentService = PaymentService();
 }
 
 ServiceInjector narrService = ServiceInjector();
