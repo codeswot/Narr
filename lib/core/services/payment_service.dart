@@ -27,7 +27,7 @@ class PaymentService {
       ..email = currentUser.user.email;
     CheckoutResponse response = await _plugin.checkout(
       context,
-      method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
+      method: CheckoutMethod.card,
       charge: charge,
     );
     return response;

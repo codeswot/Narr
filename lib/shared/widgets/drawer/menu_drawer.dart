@@ -10,6 +10,7 @@ import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
 import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';
+import 'package:narr/shared/screens/third_party_services/grant/grants.dart';
 import 'package:narr/shared/screens/third_party_services/ict_works/ictWorks.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
@@ -148,9 +149,10 @@ class DrawerItems extends StatelessWidget {
                               leading: Icon(Icons.import_contacts),
                               title: Text('Grants'),
                               onTap: () {
-                                // ...
-                                // Navigator.of(context)
-                                //     .popAndPushNamed(Grants.id);
+                                narrService.routerService.nextRoute(
+                                  context,
+                                  GrantScreen(),
+                                );
                               },
                             ),
                             ListTile(
