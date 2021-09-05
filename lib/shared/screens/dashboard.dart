@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -252,6 +253,10 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     cardHeader: 'Reading History',
                     itemCount: research.readingHistoryList.length,
+                    viewMoreTap: () {
+                      narrService.routerService
+                          .nextRoute(context, ReadingHistory());
+                    },
                   )
                 : Container(),
             currentUser.user.userRole == 'researcher'

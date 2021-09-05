@@ -3,7 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/screens/auth_screens/login.dart';
+import 'package:narr/shared/screens/auth/login.dart';
+import 'package:narr/shared/screens/blockchain/history/transaction_history.dart';
 import 'package:narr/shared/screens/blockchain/payment_info_screen.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/profile.dart';
@@ -14,6 +15,7 @@ import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_conv
 import 'package:narr/shared/screens/third_party_services/grant/grants.dart';
 import 'package:narr/shared/screens/third_party_services/ict_works/ictWorks.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
+import 'package:narr/shared/screens/third_party_services/video_confrence/video_confrencing.dart';
 import 'package:narr/shared/widgets/drawer/custom_expansion_tile.dart';
 
 class DrawerItems extends StatelessWidget {
@@ -193,7 +195,12 @@ class DrawerItems extends StatelessWidget {
                       ListTile(
                         leading: Icon(FontAwesomeIcons.history),
                         title: Text('History'),
-                        onTap: () {},
+                        onTap: () {
+                          narrService.routerService.nextRoute(
+                            context,
+                            TransactionHistoryScreen(),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -238,6 +245,8 @@ class DrawerItems extends StatelessWidget {
                     title: Text('Video Conferencing'),
                     onTap: () {
                       // ...
+                      narrService.routerService
+                          .nextRoute(context, VideoConferenceScreen());
                     },
                   ),
 

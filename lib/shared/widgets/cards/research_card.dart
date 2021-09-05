@@ -7,10 +7,12 @@ class ResearchCard extends StatelessWidget {
     required this.child,
     required this.cardHeader,
     required this.itemCount,
+    this.viewMoreTap,
   }) : super(key: key);
   final Widget child;
   final String cardHeader;
   final int itemCount;
+  final Function()? viewMoreTap;
   @override
   Widget build(BuildContext context) {
     return PrimaryCard(
@@ -25,9 +27,7 @@ class ResearchCard extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               GestureDetector(
-                onTap: () {
-                  // Navigator.of(context).pushNamed(History.id);
-                },
+                onTap: viewMoreTap,
                 child: Text(
                   'View More..',
                 ),
