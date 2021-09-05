@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:narr/shared/screens/blockchain/bank/bank_info_tab.dart';
 import 'package:narr/shared/screens/blockchain/wallet/wallet_tab.dart';
 
 class PaymentInfoScreen extends StatefulWidget {
@@ -37,12 +38,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
         body: TabBarView(
           children: [
             WalletTab(),
-            // BankInfoTab(),
-            Container(
-              child: Center(
-                child: Text('Bank info'),
-              ),
-            )
+            BankInfoTab(),
           ],
         ),
       ),
