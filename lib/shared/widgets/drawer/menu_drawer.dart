@@ -8,6 +8,7 @@ import 'package:narr/shared/screens/blockchain/payment_info_screen.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/all_research.dart';
+import 'package:narr/shared/screens/third_party_services/chat/chat_screen.dart';
 import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';
 import 'package:narr/shared/screens/third_party_services/grant/grants.dart';
@@ -184,17 +185,15 @@ class DrawerItems extends StatelessWidget {
                           // ...
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => PaymentInfoScreen()),
+                              builder: (context) => PaymentInfoScreen(),
+                            ),
                           );
                         },
                       ),
                       ListTile(
                         leading: Icon(FontAwesomeIcons.history),
                         title: Text('History'),
-                        onTap: () {
-                          // ...
-                          // Navigator.of(context).popAndPushNamed(IctWorks.id);
-                        },
+                        onTap: () {},
                       ),
                     ],
                   ),
@@ -203,9 +202,10 @@ class DrawerItems extends StatelessWidget {
                     leading: Icon(FontAwesomeIcons.solidComment),
                     title: Text('Chat'),
                     onTap: () {
-                      // Navigator.of(context).popAndPushNamed(ChatScreen.id);
-                      // Update the state of the app.
-                      // ...
+                      narrService.routerService.nextRoute(
+                        context,
+                        ChatScreen(),
+                      );
                     },
                   ),
                   // : Container(),
@@ -244,11 +244,7 @@ class DrawerItems extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.email),
                     title: Text('Email Client'),
-                    onTap: () {
-                      // Navigator.of(context).popAndPushNamed(EmailList.id);
-                      // Update the state of the app.
-                      // ...
-                    },
+                    onTap: () {},
                   )
                 ],
               ),

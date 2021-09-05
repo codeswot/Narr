@@ -78,5 +78,6 @@ flutter:
     - assets/images/png/
     - assets/images/jpg/
     - assets/svg/
+    - assets/json/
 
   
