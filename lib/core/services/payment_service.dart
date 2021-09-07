@@ -3,7 +3,7 @@ import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:narr/shared/globals/global_var.dart';
 
 class PaymentService {
-  String payStackKey = 'pk_test_b448c10aa89a7654b88480a95b1d787e9f3f61c3';
+  String payStackKey = 'pk_test_225a9f8342058f3c6781f3a3c29c4c74a357348f';
 
   final _plugin = PaystackPlugin();
 
@@ -18,6 +18,7 @@ class PaymentService {
       ..putMetaData('fullName', currentUser.user.fullName)
       ..putMetaData('_id', currentUser.user.id)
       ..putMetaData('publicKey', publicKey)
+      ..putMetaData('referral', 'NARR')
       ..card = PaymentCard(
           number: '4084084084084081',
           cvc: '408',

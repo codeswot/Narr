@@ -254,8 +254,10 @@ class _DashboardState extends State<Dashboard> {
                     cardHeader: 'Reading History',
                     itemCount: research.readingHistoryList.length,
                     viewMoreTap: () {
-                      narrService.routerService
-                          .nextRoute(context, ReadingHistory());
+                      narrService.routerService.nextRoute(
+                        context,
+                        ReadingHistory(),
+                      );
                     },
                   )
                 : Container(),

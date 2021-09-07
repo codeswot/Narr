@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:narr/shared/screens/splash_screen.dart';
+import 'package:narr/shared/screens/third_party_services/email/email_list.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
