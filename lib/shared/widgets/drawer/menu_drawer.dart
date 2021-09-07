@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/module/admin/screens/admin_researchers.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/auth/login.dart';
@@ -12,6 +13,7 @@ import 'package:narr/shared/screens/research_screens/all_research.dart';
 import 'package:narr/shared/screens/third_party_services/chat/chat_screen.dart';
 import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';
+import 'package:narr/shared/screens/third_party_services/email/email_list.dart';
 import 'package:narr/shared/screens/third_party_services/grant/grants.dart';
 import 'package:narr/shared/screens/third_party_services/ict_works/ictWorks.dart';
 import 'package:narr/shared/screens/third_party_services/ocr/ocr.dart';
@@ -106,9 +108,10 @@ class DrawerItems extends StatelessWidget {
                               leading: Icon(Icons.people),
                               title: Text('Researchers'),
                               onTap: () {
-                                // ...
-                                // Navigator.of(context)
-                                //     .popAndPushNamed(Researchers.id);
+                                narrService.routerService.nextRoute(
+                                  context,
+                                  Researchers(),
+                                );
                               },
                             ),
                             ListTile(
@@ -253,7 +256,10 @@ class DrawerItems extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.email),
                     title: Text('Email Client'),
-                    onTap: () {},
+                    onTap: () {
+                      narrService.routerService
+                          .nextRoute(context, EmailScreen());
+                    },
                   )
                 ],
               ),

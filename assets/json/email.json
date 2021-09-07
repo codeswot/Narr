@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "sender": "Google",
+        "email": "google.info.com",
+        "title": "New Sign in for Samsung Galaxy S10 plus",
+        "message": "Hello Sir, this is the verified version of the agreed documents to be used, we are now ready for the next phase",
+        "time": "11:56 pm"
+    },
+    {
+        "id": 2,
+        "sender":"Usman Murtala",
+        "email": "uzlash16@gmail.com",
+        "title": "The Tetfund primary research",
+        "message": "Do vue js support android",
+        "time": "12:23 pm"
+    },
+    {
+        "id": 3,
+        "sender": "Shams Khalil",
+        "email": "shamskhalil@gmail.com",
+
+        "title": "Submition of the grant proposal",
+        "message": "Submition of of the proposal stated for the use in acordance to change in the system, given entropy is vial",
+        "time": "02:38 am"
+    },
+    {
+        "id": 4,
+        "sender": "Musa Jibril",
+        "email": "musjib999@gmail.com",
+        "title": "The Tetfund primary research",
+        "message": "Bag head where you dey?",
+        "time": "01:56 pm"
+    },
+    {
+        "id": 5,
+        "sender": "Safnah",
+        "email": "saf@gmail.com",
+        "title": "The Tetfund primary research",
+        "message": "Where have you been loml😫💓",
+        "time": "11:56 pm"
+    },
+    {
+        "id": 6,
+        "sender": "Clerk Kent",
+        "email": "clerk@gmail.com",
+        "title": "The Tetfund primary research",
+        "message": "We have to destroy darkseid",
+        "time": "07:26 am"
+    },
+    {
+        "id": 7,
+        "sender": "Bruce Wayne",
+        "title": "The Tetfund primary research",
+        "message": "How much will i buy your house?",
+        "time": "10:46 pm"
+    },
+    {
+        "id": 8,
+        "sender": "Diana Prince",
+        "title": "The Tetfund primary research",
+        "message": "Am crushing on you Diana",
+        "time": "02:19 pm"
+    }
+]
