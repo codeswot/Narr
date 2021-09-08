@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
+import 'package:narr/shared/widgets/cards/single_user_online_card.dart';
 
 import 'blockchain/payment_info_screen.dart';
 
@@ -311,14 +312,14 @@ class _ProfileState extends State<Profile> {
 
                           return GestureDetector(
                             onTap: () {},
-                            child: Users(
+                            child: UsersOnlineCard(
                               name: '$onlineUserfullName',
                               userImage: 'assets/images/jpg/profile.jpg',
                               institution: '',
                             ),
                           );
                         },
-                        // children: usersOnlineWidgets,
+                        // children: usersOnlineCardOnlineWidgets,
                       ),
                       SizedBox(
                         height: 15,
@@ -336,90 +337,6 @@ class _ProfileState extends State<Profile> {
         child: Icon(Icons.upload),
         onPressed: () {},
       ),
-    );
-  }
-}
-
-class Users extends StatelessWidget {
-  final String name;
-  final String institution;
-
-  final String userImage;
-  Users(
-      {required this.name, required this.institution, required this.userImage});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: EdgeInsets.only(bottom: 15),
-      // height: 65,
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: 120,
-                child: Text(
-                  (name != null) ? name : '',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-              Container(
-                width: 130,
-                child: Text(
-                  'Online',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Color(0xff00a368),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          CircleAvatar(
-            child: (userImage != null)
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset((userImage != null) ? userImage : ''))
-                : Icon(Icons.person),
-            backgroundColor: Color(0xff00a368),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ReuseableCard extends StatelessWidget {
-  final Widget child;
-  ReuseableCard({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: child,
     );
   }
 }

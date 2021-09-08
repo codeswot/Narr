@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_tags/flutter_tags.dart';
-import 'package:narr/shared/globals/global_var.dart';
+import 'package:narr/core/services/service_injector/service_injectors.dart';
 
 class IctWorksContent extends StatelessWidget {
   const IctWorksContent(
@@ -83,7 +83,7 @@ class IctWorksContent extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                launchURL(linkUrl);
+                narrService.utilityService.launchURL(linkUrl);
               },
               child: Text(
                 'Link',

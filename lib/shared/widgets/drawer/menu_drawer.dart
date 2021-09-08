@@ -286,19 +286,24 @@ class DrawerItems extends StatelessWidget {
                       Login(),
                     );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Log Out',
-                        style: TextStyle(
-                          color: Colors.red.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Log Out',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      Icon(Icons.exit_to_app),
-                    ],
+                        Icon(
+                          Icons.power_settings_new,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

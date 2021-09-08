@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:path/path.dart';
 
 class ComposeEmail extends StatefulWidget {
   @override
