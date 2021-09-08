@@ -15,6 +15,8 @@ import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/research_card.dart';
 import 'package:narr/shared/widgets/cards/users_online_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -180,9 +182,7 @@ class _DashboardState extends State<Dashboard> {
                 usersOnline: usersOnline.usersOnlineList.length,
                 userName: currentUser.user.fullName,
                 userEmail: currentUser.user.email,
-                onTap: () {
-                  // Navigator.of(context).pushNamed(Profile.id);
-                },
+                onTap: () {},
               );
             }),
             currentUser.user.userRole == 'researcher'
@@ -384,6 +384,24 @@ class _DashboardState extends State<Dashboard> {
                     itemCount: 0,
                   )
                 : Container(),
+            PrimaryCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Overview',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 180,
+                    child: currentUser.user.userRole == 'admin'
+                        ? charts.PieChart(chartAnalytics)
+                        : charts.LineChart(chartAnalytics),
+                  ),
+                ],
+              ),
+            ),
             Observer(builder: (_) {
               return PrimaryCard(
                 child: Column(

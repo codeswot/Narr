@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
+import 'package:narr/shared/screens/research_screens/single_research.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Researchers extends StatefulWidget {
   @override
@@ -17,11 +19,32 @@ class _ResearchersState extends State<Researchers> {
         ),
       ),
       body: FutureBuilder<dynamic>(
-        future: narrService.researchService.getAllResearchers(),
+        future: narrService.userService.getAllResearchers(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Shimmer.fromColors(
+              child: ListView.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/jpg/profile.jpg'),
+                    ),
+                    title: Text('loading...'),
+                    subtitle: Text('Loading...'),
+                    trailing: Text(
+                      '',
+                    ),
+                    onTap: () {},
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(),
+                itemCount: 10,
+              ),
+              baseColor: Color(0xffE0E0E0),
+              highlightColor: Color(0xffF5F5F5),
+              enabled: true,
             );
           }
           return ListView.separated(
@@ -41,7 +64,14 @@ class _ResearchersState extends State<Researchers> {
                         : Colors.red,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  narrService.routerService.nextRoute(
+                    context,
+                    SingleResearch(
+                      researchId: user['_id'],
+                    ),
+                  );
+                },
               );
             },
             separatorBuilder: (BuildContext context, int index) => Divider(),

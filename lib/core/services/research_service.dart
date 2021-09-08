@@ -67,26 +67,4 @@ class ResearchService {
     );
     return data;
   }
-
-  //
-  Future getAllResearchers() async {
-    dynamic data;
-    await narrService.apiService
-        .getRequest(endpoint: '$narrUrl/user', headers: {
-      'x-token': currentUser.token,
-    }).then(
-      (value) {
-        if (value.statusCode == 200) {
-          var decodedResponse = jsonDecode(value.body);
-          var researchersList = decodedResponse['payload'];
-          data = researchersList;
-        } else {
-          var decodedResponse = jsonDecode(value.body);
-          var errorMessage = decodedResponse['message'];
-          data = errorMessage;
-        }
-      },
-    );
-    return data;
-  }
 }

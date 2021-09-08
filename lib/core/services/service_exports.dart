@@ -7,6 +7,7 @@ export 'institution_service.dart';
 export 'router_service.dart';
 export 'persistant_storage_service.dart';
 export 'research_service.dart';
+export 'user_service.dart';
 export 'socket_service.dart';
 export 'upload_service.dart';
 export 'user_service.dart';
