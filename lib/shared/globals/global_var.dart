@@ -35,7 +35,7 @@ Color determinePrimaryColor(context) {
   }
 }
 
-final data = [
+final lineChartData = [
   ChartModel(1, 75),
   ChartModel(2, 35),
   ChartModel(3, 10),
@@ -43,12 +43,31 @@ final data = [
   ChartModel(5, 75),
 ];
 
-List<charts.Series<ChartModel, int>> chartAnalytics = [
+final pieChartData = [
+  PieChartModel(1, 75, charts.MaterialPalette.red.shadeDefault),
+  PieChartModel(2, 35, charts.MaterialPalette.green.shadeDefault),
+  PieChartModel(3, 20, charts.MaterialPalette.blue.shadeDefault),
+  PieChartModel(4, 65, charts.Color.fromHex(code: '#795548')),
+  PieChartModel(5, 75, charts.MaterialPalette.deepOrange.shadeDefault),
+];
+
+List<charts.Series<ChartModel, int>> lineChartAnalytics = [
   charts.Series<ChartModel, int>(
-    id: 'Sales',
+    id: 'research',
     colorFn: (_, __) => charts.Color.fromHex(code: '#00a368'),
     domainFn: (ChartModel sales, _) => sales.month,
     measureFn: (ChartModel sales, _) => sales.captured,
-    data: data,
+    data: lineChartData,
+  )
+];
+
+List<charts.Series<PieChartModel, int>> pieChartAnalytics = [
+  charts.Series<PieChartModel, int>(
+    id: 'research',
+    colorFn: (PieChartModel analytics, __) => analytics.color,
+    domainFn: (PieChartModel analytics, _) => analytics.month,
+    measureFn: (PieChartModel analytics, _) => analytics.captured,
+    labelAccessorFn: (PieChartModel row, _) => '${row.captured} ',
+    data: pieChartData,
   )
 ];

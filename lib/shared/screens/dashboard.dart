@@ -6,6 +6,7 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
+import 'package:narr/shared/widgets/buttons/bullet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
@@ -396,9 +397,113 @@ class _DashboardState extends State<Dashboard> {
                   SizedBox(
                     height: 180,
                     child: currentUser.user.userRole == 'admin'
-                        ? charts.PieChart(chartAnalytics)
-                        : charts.LineChart(chartAnalytics),
+                        ? charts.PieChart(
+                            pieChartAnalytics,
+                            defaultRenderer: charts.ArcRendererConfig(
+                              arcWidth: 100,
+                              arcRendererDecorators: [
+                                charts.ArcLabelDecorator()
+                              ],
+                            ),
+                          )
+                        : charts.LineChart(lineChartAnalytics),
                   ),
+                  SizedBox(height: 8),
+                  currentUser.user.userRole == 'admin'
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyBullet(Colors.red),
+                                    SizedBox(width: 5),
+                                    Text('All Research')
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    MyBullet(Colors.green),
+                                    SizedBox(width: 5),
+                                    Text('OCR')
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    MyBullet(Colors.blue),
+                                    SizedBox(width: 5),
+                                    Text('All Researchers')
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    MyBullet(Color(0xff795548)),
+                                    SizedBox(width: 5),
+                                    Text('Doc Convertion')
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  currentUser.user.userRole == 'admin'
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyBullet(Colors.deepOrange),
+                            SizedBox(width: 5),
+                            Text('Researches')
+                          ],
+                        )
+                      : Container(),
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     ListTile(
+                  //       leading: MyBullet(Colors.red),
+                  //       title: Text('Researches'),
+                  //     ),
+                  //     ListTile(
+                  //       leading: MyBullet(Colors.green),
+                  //       title: Text('Researches'),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     ListTile(
+                  //       leading: MyBullet(Colors.blue),
+                  //       title: Text('Researches'),
+                  //     ),
+                  //     ListTile(
+                  //       leading: MyBullet(Color(0xff795548)),
+                  //       title: Text('Researches'),
+                  //     ),
+                  //     ListTile(
+                  //       leading: MyBullet(Colors.deepOrange),
+                  //       title: Text('Researches'),
+                  //     ),
+                  //   ],
+                  // ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

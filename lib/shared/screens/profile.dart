@@ -107,13 +107,7 @@ class _ProfileState extends State<Profile> {
                               height: 50,
                               child: VerticalDivider(thickness: 2, width: 1.8)),
                           GestureDetector(
-                            onTap: () {
-                              // print('tap');
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //   builder: (context) =>
-                              //       TransactionHistoryScreen(),
-                              // ));
-                            },
+                            onTap: () {},
                             child: Column(
                               children: [
                                 Icon(
