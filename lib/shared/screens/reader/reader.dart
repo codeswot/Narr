@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/themes/dark_mode.dart';
-import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
 import 'package:narr/shared/widgets/photo_slider.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'dart:math';
 
 class Reader extends StatefulWidget {
-  final String id;
-  Reader(this.id);
+  final dynamic reasearch;
+  Reader(this.reasearch);
   @override
   _ReaderState createState() => _ReaderState();
 }
@@ -23,17 +22,14 @@ class _ReaderState extends State<Reader> {
       appBar: AppBar(
         title: Text('Reader'),
       ),
-      drawer: Drawer(
-        child: DrawerItems(),
-      ),
-      body: Slider(widget.id),
+      body: Slider(widget.reasearch),
     );
   }
 }
 
 class Slider extends StatefulWidget {
-  final String id;
-  Slider(this.id);
+  final dynamic research;
+  Slider(this.research);
   @override
   _SliderState createState() => _SliderState();
 }
@@ -47,33 +43,32 @@ class _SliderState extends State<Slider> {
 
   @override
   Widget build(BuildContext context) {
-    // _networkHelper.addDocumentToResearchHistoryArr(
-    //     id: widget.id, currentPage: _currentPage);
-
+    var readPath = widget.research['readPath'];
+    var nPages = widget.research['nPages'];
+    var researchTitle = widget.research['researchTitle'];
+    var authors = widget.research['authors'];
+    var genre = widget.research['genre'];
+    var category = widget.research['category'];
+    var accessType = widget.research['accessType'];
+    var year = widget.research['year'];
     return FutureBuilder<dynamic>(
-      future: narrService.researchService.getOneResearch(widget.id),
       builder: (context, research) {
-        var readPath = research.data['readPath'];
-        var nPages = research.data['nPages'];
-        var researchTitle = research.data['researchTitle'];
-        var authors = research.data['authors'];
-        var genre = research.data['genre'];
-        var category = research.data['category'];
-        var accessType = research.data['accessType'];
-        var year = research.data['year'];
-
         String requestUrl() {
           // int ranNum = _random.nextInt(8163907) * _random.nextInt(2765309);
           String url =
-              'https://app.narr.ng$readPath$_currentPage.jpg?token=${currentUser.token}&nPages=$nPages&researchTitle=$researchTitle&authors=$authors&genre=$genre&category=$category&accessType=$accessType&year=$year${_currentPage == research.data['nPages'] ? '&end=true' : ''}';
+              'https://app.narr.ng$readPath$_currentPage.jpg?token=${currentUser.token}&nPages=$nPages&researchTitle=$researchTitle&authors=$authors&genre=$genre&category=$category&accessType=$accessType&year=$year${_currentPage == nPages ? '&end=true' : ''}';
           return url;
         }
 
-        if (!research.hasData) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+        // if (!research.hasData) {
+        //   return Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // } else if (research.connectionState == ConnectionState.waiting) {
+        //   return Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // }
         return Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,10 +164,14 @@ class _SliderState extends State<Slider> {
                           icon: Icon(Icons.chevron_right),
                           onPressed: () {
                             setState(() {
-                              if (_currentPage == research.data['nPages']) {
-                                _currentPage = research.data['nPages'];
+                              if (_currentPage == nPages) {
+                                setState(() {
+                                  _currentPage = nPages;
+                                });
                               } else {
-                                _currentPage = _currentPage! + 1;
+                                setState(() {
+                                  _currentPage = _currentPage! + 1;
+                                });
                               }
                             });
                           },
@@ -183,7 +182,7 @@ class _SliderState extends State<Slider> {
                           icon: Icon(Icons.last_page),
                           onPressed: () {
                             setState(() {
-                              _currentPage = research.data['nPages'];
+                              _currentPage = nPages;
                             });
                           },
                         ),

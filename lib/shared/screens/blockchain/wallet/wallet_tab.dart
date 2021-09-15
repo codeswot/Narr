@@ -9,6 +9,7 @@ import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/wallet_card.dart';
 import 'package:narr/shared/globals/global_var.dart';
+import 'package:path/path.dart';
 
 // import 'package:flutter_paystack/flutter_paystack.dart';
 
@@ -67,7 +68,7 @@ class _WalletTabState extends State<WalletTab> {
                       SizedBox(width: 5),
                       RichText(
                         text: TextSpan(
-                          text: '2.5',
+                          text: currentUser.user.blockchain.tokens,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -165,7 +166,7 @@ class _WalletTabState extends State<WalletTab> {
                           Text('Address: '),
                           Flexible(
                             child: Text(
-                              publicKey.toLowerCase(),
+                              currentUser.user.blockchain.publicKey,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -184,7 +185,7 @@ class _WalletTabState extends State<WalletTab> {
                           Text('Token Balance: '),
                           Flexible(
                             child: Text(
-                              '150 Narr coin',
+                              '${currentUser.user.blockchain.tokens} Narr coin',
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
@@ -203,7 +204,7 @@ class _WalletTabState extends State<WalletTab> {
                           Text('Token Equivelence (Naira): '),
                           Flexible(
                             child: Text(
-                              'N15,000',
+                              '${narrService.utilityService.convertToNarrCoin(narrService.utilityService.amountFormarter(currentUser.user.blockchain.tokens))}',
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
@@ -241,7 +242,7 @@ class _WalletTabState extends State<WalletTab> {
                           ),
                           SizedBox(width: 5),
                           Text('Gas Balance: '),
-                          Text('1.583 Eth'),
+                          Text('${currentUser.user.blockchain.gasBalance} Eth'),
                         ],
                       ),
                       SizedBox(height: 16),

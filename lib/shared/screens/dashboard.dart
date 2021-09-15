@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
+import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/screens/profile.dart';
+import 'package:narr/shared/screens/research_screens/research.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
 import 'package:narr/shared/widgets/buttons/bullet.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/header_card.dart';
-import 'package:narr/shared/widgets/cards/institution_info_card.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/research_card.dart';
-import 'package:narr/shared/widgets/cards/users_online_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -100,32 +100,72 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ],
                     ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search NARR',
-                        border: InputBorder.none,
-                        suffixIcon: Icon(Icons.search),
-                      ),
-                    ),
                   ), //search and ctgr
-
-                  SizedBox(height: 25),
-                  InstitutionoInfoCard(
-                    institutionLogo:
-                        '$baseUrl${currentUser.user.institution.logo}',
-                    institutionName: currentUser.user.institution.name,
-                    institutionAcronym: currentUser.user.institution.acronym,
-                    institutionType: currentUser.user.institution.type,
-                    year: currentUser.user.institution.year,
-                    ownership: currentUser.user.institution.ownership,
-                    url: currentUser.user.institution.url,
-                    onTap: () {},
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hello',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            currentUser.user.fullName,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                        backgroundImage:
+                            AssetImage('assets/images/jpg/profile.jpg'),
+                      ),
+                    ],
                   ),
+                  SizedBox(height: 25),
+                  // Observer(builder: (_) {
+                  //   return UserInfoCard(
+                  //     institutionLogo: 'assets/images/jpg/profile.jpg',
+                  //     name: currentUser.user.fullName,
+                  //     role: currentUser.user.userRole,
+                  //     email: currentUser.user.email,
+                  //     institutionName: currentUser.user.institution.name,
+                  //     phone: currentUser.user.phone,
+                  //     address: currentUser.user.address,
+                  //     usersOnline:
+                  //         usersOnline.usersOnlineList.length.toString(),
+                  //     onTap: () {},
+                  //   );
+                  // }),
                   // SizedBox(height: 15),
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            Container(
+              margin: EdgeInsets.all(15.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search NARR',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      width: 0,
+                      style: BorderStyle.none,
+                    ),
+                  ),
+                  suffixIcon: Icon(Icons.search),
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                ),
+              ),
+            ),
             PrimaryCard(
               child: Column(
                 children: [
@@ -178,14 +218,84 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            Observer(builder: (_) {
-              return UsersOnlineCard(
-                usersOnline: usersOnline.usersOnlineList.length,
-                userName: currentUser.user.fullName,
-                userEmail: currentUser.user.email,
-                onTap: () {},
-              );
-            }),
+
+            Container(
+              margin: EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Researches',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            narrService.routerService
+                                .nextRoute(context, AllResearch());
+                          },
+                          child: Text('View More...'))
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Container(
+                    height: 200,
+                    child: FutureBuilder<dynamic>(
+                      future: narrService.researchService.getAllResearch(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (!snapshot.hasData) {
+                          return Center(
+                            child: Text('No Data!'),
+                          );
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            final payload = snapshot.data[index];
+                            var image = payload['thumbnail'];
+                            var id = payload['_id'];
+                            var imageUrl =
+                                '$baseUrl$image?token=${currentUser.token}';
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  narrService.routerService.nextRoute(
+                                      context, SingleResearch(researchId: id));
+                                },
+                                child: Container(
+                                  child: Image.network(
+                                    imageUrl,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // InstitutionInfoCard(
+            //   usersOnline: usersOnline.usersOnlineList.length,
+            //   userName: currentUser.user.fullName,
+            //   userEmail: currentUser.user.email,
+            //   onTap: () {},
+            // ),
             currentUser.user.userRole == 'researcher'
                 ? ResearchCard(
                     child: Observer(

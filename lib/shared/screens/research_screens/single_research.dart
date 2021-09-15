@@ -190,15 +190,18 @@ class SingleResearch extends StatelessWidget {
                               children: [
                                 ReadButton(
                                   title: 'Read',
-                                  id: research.data['_id'],
+                                  onTap: () =>
+                                      narrService.routerService.nextRoute(
+                                    context,
+                                    Reader(research.data),
+                                  ),
                                 ),
-                                GestureDetector(
-                                  onTap: () => narrService.routerService
-                                      .nextRoute(context,
-                                          Reader(research.data['_id'])),
-                                  child: ReadButton(
-                                    title: 'Bookmark',
-                                    id: research.data['_id'],
+                                ReadButton(
+                                  title: 'Bookmark',
+                                  onTap: () =>
+                                      narrService.routerService.nextRoute(
+                                    context,
+                                    Reader(research.data),
                                   ),
                                 ),
                               ],

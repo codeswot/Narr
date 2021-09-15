@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-class InstitutionoInfoCard extends StatelessWidget {
-  const InstitutionoInfoCard({
+class UserInfoCard extends StatelessWidget {
+  const UserInfoCard({
     Key? key,
-    required this.institutionName,
+    required this.name,
     required this.institutionLogo,
-    required this.institutionAcronym,
-    required this.institutionType,
-    required this.year,
+    required this.role,
+    required this.email,
+    required this.institutionName,
+    required this.phone,
+    required this.address,
+    required this.usersOnline,
     required this.onTap,
-    required this.ownership,
-    required this.url,
   }) : super(key: key);
-  final String institutionName;
+  final String name;
   final String institutionLogo;
-  final String institutionAcronym;
-  final String institutionType;
-  final String year, ownership, url;
+  final String role;
+  final String email;
+  final String institutionName, address, phone, usersOnline;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class InstitutionoInfoCard extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 28,
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(institutionLogo),
+                    backgroundImage: AssetImage(institutionLogo),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -55,7 +56,7 @@ class InstitutionoInfoCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      institutionName,
+                      name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -65,7 +66,7 @@ class InstitutionoInfoCard extends StatelessWidget {
                       maxLines: 2,
                     ),
                     Text(
-                      '($institutionAcronym)',
+                      '($role)',
                       style: TextStyle(
                         fontSize: 10,
                       ),
@@ -82,7 +83,7 @@ class InstitutionoInfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Type: $institutionType',
+                  'Email: $email',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -90,7 +91,7 @@ class InstitutionoInfoCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  'Ownership: $ownership',
+                  'Institution: $institutionName',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -98,34 +99,27 @@ class InstitutionoInfoCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  'Established: $year',
+                  'Phone: $phone',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
                 ),
                 SizedBox(height: 5),
-                Row(
-                  children: [
-                    Text(
-                      'Website: ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                    InkWell(
-                      // onTap: () => launchURL(url),
-                      child: Text(
-                        '$url',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Address: $address',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Users Online: $usersOnline',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
