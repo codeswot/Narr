@@ -62,10 +62,7 @@ class IctWorksContent extends StatelessWidget {
           itemCount: _items.length, // required
           itemBuilder: (int index) {
             final item = _items[index];
-
             return ItemTags(
-              // Each ItemTags must contain a Key. Keys allow Flutter to
-              // uniquely identify widgets.
               key: Key(index.toString()),
               index: index, // required
               title: item,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 
-class UsersOnlineCard extends StatelessWidget {
-  const UsersOnlineCard({
+class InstitutionInfoCard extends StatelessWidget {
+  const InstitutionInfoCard({
     Key? key,
     required this.usersOnline,
     required this.onTap,
@@ -20,7 +20,7 @@ class UsersOnlineCard extends StatelessWidget {
       child: PrimaryCard(
         child: Column(
           children: [
-            Text('User\'s Online: $usersOnline'),
+            Text('Institution', style: TextStyle(fontWeight: FontWeight.bold)),
             Divider(thickness: 1.2),
             SizedBox(height: 15),
             Container(

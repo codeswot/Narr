@@ -80,4 +80,9 @@ flutter:
     - assets/svg/
     - assets/json/
 
+  fonts:
+    - family: CourrierPrime
+      fonts:
+        - asset: assets/fonts/CourierPrime-Regular.ttf
+
   

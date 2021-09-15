@@ -9,7 +9,7 @@ import 'package:narr/shared/screens/blockchain/history/transaction_history.dart'
 import 'package:narr/shared/screens/blockchain/payment_info_screen.dart';
 import 'package:narr/shared/screens/dashboard.dart';
 import 'package:narr/shared/screens/profile.dart';
-import 'package:narr/shared/screens/research_screens/all_research.dart';
+import 'package:narr/shared/screens/research_screens/research.dart';
 import 'package:narr/shared/screens/third_party_services/chat/chat_screen.dart';
 import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
 import 'package:narr/shared/screens/third_party_services/doc_convertion/doc_convertion.dart';

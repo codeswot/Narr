@@ -41,6 +41,10 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
             BankInfoTab(),
           ],
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: Text('Add Card'),
+        ),
       ),
     );
   }

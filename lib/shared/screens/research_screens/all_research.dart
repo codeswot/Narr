@@ -3,75 +3,24 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
-import 'package:narr/shared/screens/research_screens/upload_research.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
-import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
 
-class AllResearch extends StatefulWidget {
+class ResearchCategory extends StatefulWidget {
+  final String category;
+
+  ResearchCategory(this.category);
+
   @override
-  _AllResearchState createState() => _AllResearchState();
+  _ResearchCategoryState createState() => _ResearchCategoryState();
 }
 
-class _AllResearchState extends State<AllResearch> {
+class _ResearchCategoryState extends State<ResearchCategory> {
+  List<Widget> researchWidget = [];
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> researchWidget = [
-      Container(
-        margin: EdgeInsets.all(15),
-        child: Material(
-          elevation: 5.0,
-          borderRadius: BorderRadius.circular(50),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search Repository',
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              contentPadding: EdgeInsets.only(
-                left: 15,
-                bottom: 11,
-                top: 11,
-                right: 15,
-              ),
-            ),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 160),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                offset: Offset(0, 2.5),
-                blurRadius: 5,
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 11,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(bottom: 8.0, left: 15),
-        child: Text(
-          'All Research',
-          style: TextStyle(fontSize: 20, color: Colors.grey),
-        ),
-      ),
-    ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Repository'),
-      ),
-      drawer: Drawer(
-        child: DrawerItems(),
-      ),
-      body: FutureBuilder<dynamic>(
+    return Container(
+      child: FutureBuilder<dynamic>(
         future: narrService.researchService.getAllResearch(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -90,7 +39,6 @@ class _AllResearchState extends State<AllResearch> {
             var id = document['_id'];
             var image = document['thumbnail'];
             var imageUrl = '$baseUrl$image?token=${currentUser.token}';
-
             final coverPage = GestureDetector(
               onTap: () => narrService.routerService.nextRoute(
                 context,
@@ -112,19 +60,18 @@ class _AllResearchState extends State<AllResearch> {
                 ),
               ),
             );
-            researchWidget.add(coverPage);
+            if (widget.category == 'all') {
+              researchWidget.add(coverPage);
+            } else {
+              researchWidget.add(
+                widget.category == document['genre'] ? coverPage : Container(),
+              );
+            }
           }
           return ListView(
             children: researchWidget,
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          narrService.routerService.nextRoute(context, ResearchUpload());
-        },
-        label: Text('Upload Research'),
-        icon: Icon(Icons.add),
       ),
     );
   }
