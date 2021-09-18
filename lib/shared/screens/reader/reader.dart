@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/themes/dark_mode.dart';
 import 'package:narr/shared/widgets/photo_slider.dart';

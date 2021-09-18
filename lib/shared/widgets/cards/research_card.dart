@@ -26,11 +26,9 @@ class ResearchCard extends StatelessWidget {
                 cardHeader,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              GestureDetector(
+              InkWell(
                 onTap: viewMoreTap,
-                child: Text(
-                  'View More..',
-                ),
+                child: Text('View More...'),
               ),
             ],
           ),

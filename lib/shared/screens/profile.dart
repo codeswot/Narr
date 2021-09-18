@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/themes/colors.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
-import 'package:narr/shared/widgets/cards/single_user_online_card.dart';
 import 'blockchain/payment_info_screen.dart';
 
 class Profile extends StatefulWidget {

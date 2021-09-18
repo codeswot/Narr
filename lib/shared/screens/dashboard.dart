@@ -5,11 +5,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
-import 'package:narr/shared/globals/configs.dart';
 import 'package:narr/shared/screens/profile.dart';
-import 'package:narr/shared/screens/research_screens/research.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
 import 'package:narr/shared/widgets/buttons/bullet.dart';
+import 'package:narr/shared/widgets/cards/activities_card.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/header_card.dart';
@@ -108,16 +107,22 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hello',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
+                            currentUser.user.fullName,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            currentUser.user.fullName,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                            currentUser.user.email,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'Last LogIn: ${narrService.utilityService.dateFormatting(currentUser.user.lastLoggedIn)}',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
@@ -166,129 +171,95 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            PrimaryCard(
-              child: Column(
-                children: [
-                  Text('Activities'),
-                  Divider(thickness: 1.2),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AnalyticsCard(
-                        title: 'Documents \nUploaded',
-                        count: '22',
-                        color: Color(0xff00a368),
-                        icon: Icons.insert_drive_file,
-                        onTap: () {},
-                        info: '',
-                      ),
-                      AnalyticsCard(
-                        title: 'Read \nSuggestions',
-                        count: '22',
-                        color: Colors.blue,
-                        icon: Icons.import_contacts,
-                        info: '',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AnalyticsCard(
-                        title: 'Mentions',
-                        info: 'Mentions in the last 1 year',
-                        count: '22',
-                        color: Colors.orange,
-                        icon: Icons.person,
-                        onTap: () {},
-                      ),
-                      AnalyticsCard(
-                        title: 'Research Grants',
-                        count: '22',
-                        color: Colors.red,
-                        icon: Icons.insert_drive_file,
-                        onTap: () {},
-                        info: '',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
 
             Container(
-              margin: EdgeInsets.all(15),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Top Researches',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            narrService.routerService
-                                .nextRoute(context, AllResearch());
-                          },
-                          child: Text('View More...'))
-                    ],
+                  Expanded(
+                    child: ActivitiesCard(
+                      color: Color(0xff00a368),
+                      icon: Icons.cloud_upload,
+                      title: 'Upload',
+                    ),
                   ),
-                  SizedBox(height: 15),
-                  Container(
-                    height: 200,
-                    child: FutureBuilder<dynamic>(
-                      future: narrService.researchService.getAllResearch(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else if (!snapshot.hasData) {
-                          return Center(
-                            child: Text('No Data!'),
-                          );
-                        }
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            final payload = snapshot.data[index];
-                            var image = payload['thumbnail'];
-                            var id = payload['_id'];
-                            var imageUrl =
-                                '$baseUrl$image?token=${currentUser.token}';
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  narrService.routerService.nextRoute(
-                                      context, SingleResearch(researchId: id));
-                                },
-                                child: Container(
-                                  child: Image.network(
-                                    imageUrl,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                  Expanded(
+                    child: ActivitiesCard(
+                      color: Color(0xffFF7A93),
+                      icon: Icons.import_contacts,
+                      title: 'Grants',
+                    ),
+                  ),
+                  Expanded(
+                    child: ActivitiesCard(
+                      color: Color(0xff609CFE),
+                      icon: FontAwesomeIcons.handHoldingUsd,
+                      title: 'Fund',
+                    ),
+                  ),
+                  Expanded(
+                    child: ActivitiesCard(
+                      color: Color(0xffF9B620),
+                      icon: Icons.people,
+                      title: 'Online Users',
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox(height: 15),
+            // PrimaryCard(
+            //   child: Column(
+            //     children: [
+            //       Text('Activities'),
+            //       Divider(thickness: 1.2),
+            //       SizedBox(height: 15),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           AnalyticsCard(
+            //             title: 'Documents \nUploaded',
+            //             count: '22',
+            //             color: Color(0xff00a368),
+            //             icon: Icons.insert_drive_file,
+            //             onTap: () {},
+            //             info: '',
+            //           ),
+            //           AnalyticsCard(
+            //             title: 'Read \nSuggestions',
+            //             count: '22',
+            //             color: Colors.blue,
+            //             icon: Icons.import_contacts,
+            //             info: '',
+            //             onTap: () {},
+            //           ),
+            //         ],
+            //       ),
+            //       SizedBox(height: 15),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            // AnalyticsCard(
+            //   title: 'Mentions',
+            //   info: 'Mentions in the last 1 year',
+            //   count: '22',
+            //   color: Colors.orange,
+            //   icon: Icons.person,
+            //   onTap: () {},
+            // ),
+            //           AnalyticsCard(
+            //             title: 'Research Grants',
+            //             count: '22',
+            //             color: Colors.red,
+            //             icon: Icons.insert_drive_file,
+            //             onTap: () {},
+            //             info: '',
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
             // InstitutionInfoCard(
             //   usersOnline: usersOnline.usersOnlineList.length,
