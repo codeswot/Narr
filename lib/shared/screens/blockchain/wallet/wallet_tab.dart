@@ -9,7 +9,6 @@ import 'package:narr/shared/widgets/buttons/primary_raised_button.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/wallet_card.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:path/path.dart';
 
 // import 'package:flutter_paystack/flutter_paystack.dart';
 
