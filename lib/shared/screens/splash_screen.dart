@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   silentLogin() async {
-    narrService.routerService.nextRoute(context, Login());
+    narrService.routerService.popUntil(context, Login());
   }
 
   @override

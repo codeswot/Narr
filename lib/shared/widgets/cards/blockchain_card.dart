@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:narr/shared/themes/colors.dart';
 
 class AnalyticsCard extends StatelessWidget {
@@ -21,20 +22,25 @@ class AnalyticsCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.4,
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(1),
-            color: Colors.white,
-            border: Border.all(color: Colors.grey.shade300)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 2.4),
+              blurRadius: 5,
+              color: Colors.grey.withOpacity(0.25),
+            ),
+          ],
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -43,26 +49,27 @@ class AnalyticsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(width: 5),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: color,
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
-                    size: 20,
-                  ),
+                Icon(
+                  icon,
+                  color: NarrColors.royalGreen,
+                  size: 20,
                 ),
-                SizedBox(width: 2),
+                SizedBox(width: 5),
                 Text(
                   '$count',
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 15,
                     color: color,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
+            SizedBox(height: 10),
+            Image.asset(
+              'assets/images/png/wave.png',
+              width: double.infinity,
+            )
           ],
         ),
       ),
