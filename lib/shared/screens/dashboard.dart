@@ -11,7 +11,7 @@ import 'package:narr/shared/widgets/buttons/bullet.dart';
 import 'package:narr/shared/widgets/cards/activities_card.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:narr/shared/globals/global_var.dart';
-import 'package:narr/shared/widgets/cards/header_card.dart';
+import 'package:narr/shared/widgets/cards/blockchain_card.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/research_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
@@ -171,7 +171,6 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -208,65 +207,6 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(height: 15),
-            // PrimaryCard(
-            //   child: Column(
-            //     children: [
-            //       Text('Activities'),
-            //       Divider(thickness: 1.2),
-            //       SizedBox(height: 15),
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            //           AnalyticsCard(
-            //             title: 'Documents \nUploaded',
-            //             count: '22',
-            //             color: Color(0xff00a368),
-            //             icon: Icons.insert_drive_file,
-            //             onTap: () {},
-            //             info: '',
-            //           ),
-            //           AnalyticsCard(
-            //             title: 'Read \nSuggestions',
-            //             count: '22',
-            //             color: Colors.blue,
-            //             icon: Icons.import_contacts,
-            //             info: '',
-            //             onTap: () {},
-            //           ),
-            //         ],
-            //       ),
-            //       SizedBox(height: 15),
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         children: [
-            // AnalyticsCard(
-            //   title: 'Mentions',
-            //   info: 'Mentions in the last 1 year',
-            //   count: '22',
-            //   color: Colors.orange,
-            //   icon: Icons.person,
-            //   onTap: () {},
-            // ),
-            //           AnalyticsCard(
-            //             title: 'Research Grants',
-            //             count: '22',
-            //             color: Colors.red,
-            //             icon: Icons.insert_drive_file,
-            //             onTap: () {},
-            //             info: '',
-            //           ),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
-            // InstitutionInfoCard(
-            //   usersOnline: usersOnline.usersOnlineList.length,
-            //   userName: currentUser.user.fullName,
-            //   userEmail: currentUser.user.email,
-            //   onTap: () {},
-            // ),
             currentUser.user.userRole == 'researcher'
                 ? ResearchCard(
                     child: Observer(
@@ -588,97 +528,119 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
+            SizedBox(height: 12),
             Observer(builder: (_) {
-              return PrimaryCard(
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Blockchain Analytics'),
-                    Divider(thickness: 1.2),
-                    SizedBox(height: 15),
+                    SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        AnalyticsCard(
-                          title: 'Latest Block',
-                          count:
-                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['number']}',
-                          icon: FontAwesomeIcons.thLarge,
-                          onTap: () {},
-                          info: '',
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Latest Block',
+                            count:
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['number']}',
+                            icon: FontAwesomeIcons.thLarge,
+                            onTap: () {},
+                            info: '',
+                          ),
                         ),
-                        AnalyticsCard(
-                          title: 'Difficulty',
-                          count:
-                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['difficulty']}',
-                          icon: FontAwesomeIcons.chartLine,
-                          info: '',
-                          onTap: () {},
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Difficulty',
+                            count:
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['difficulty']}',
+                            icon: FontAwesomeIcons.chartLine,
+                            info: '',
+                            onTap: () {},
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        AnalyticsCard(
-                          title: 'Gas Used',
-                          info: '',
-                          count:
-                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasUsed']}',
-                          icon: FontAwesomeIcons.gasPump,
-                          onTap: () {},
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Gas Used',
+                            info: '',
+                            count:
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasUsed']}',
+                            icon: FontAwesomeIcons.gasPump,
+                            onTap: () {},
+                          ),
                         ),
-                        AnalyticsCard(
-                          title: 'Gas Limit',
-                          count:
-                              '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasLimit']}',
-                          icon: FontAwesomeIcons.gasPump,
-                          onTap: () {},
-                          info: '',
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Gas Limit',
+                            count:
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasLimit']}',
+                            icon: FontAwesomeIcons.gasPump,
+                            onTap: () {},
+                            info: '',
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        AnalyticsCard(
-                          title: 'Txn(from)',
-                          count:
-                              '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['from']}',
-                          icon: Icons.north_east,
-                          onTap: () {},
-                          info: '',
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Txn(from)',
+                            count:
+                                '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['from']}',
+                            icon: Icons.north_east,
+                            onTap: () {},
+                            info: '',
+                          ),
                         ),
-                        AnalyticsCard(
-                          title: 'Txn(to)',
-                          count:
-                              '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['to']}',
-                          icon: Icons.south_west,
-                          info: '',
-                          onTap: () {},
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Txn(to)',
+                            count:
+                                '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['to']}',
+                            icon: Icons.south_west,
+                            info: '',
+                            onTap: () {},
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 12),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        AnalyticsCard(
-                          title: 'Value',
-                          info: '',
-                          count:
-                              '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['value']}',
-                          icon: FontAwesomeIcons.ethereum,
-                          onTap: () {},
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Value',
+                            info: '',
+                            count:
+                                '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['value']}',
+                            icon: FontAwesomeIcons.ethereum,
+                            onTap: () {},
+                          ),
                         ),
-                        AnalyticsCard(
-                          title: 'Nonce',
-                          count:
-                              '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['nonce']}',
-                          icon: FontAwesomeIcons.gasPump,
-                          onTap: () {},
-                          info: '',
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: AnalyticsCard(
+                            title: 'Nonce',
+                            count:
+                                '${transaction.blockchainTransaction == null ? 'loading...' : transaction.blockchainTransaction['nonce']}',
+                            icon: FontAwesomeIcons.gasPump,
+                            onTap: () {},
+                            info: '',
+                          ),
                         ),
                       ],
                     ),
