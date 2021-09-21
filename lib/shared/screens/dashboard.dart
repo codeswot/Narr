@@ -7,14 +7,20 @@ import 'package:narr/core/services/service_injector/service_injectors.dart';
 import 'package:narr/module/researcher/screens/reading_history.dart';
 import 'package:narr/shared/screens/profile.dart';
 import 'package:narr/shared/screens/research_screens/single_research.dart';
+import 'package:narr/shared/screens/research_screens/upload_research.dart';
+import 'package:narr/shared/screens/third_party_services/crowd_funding/crowd_funding.dart';
+import 'package:narr/shared/screens/third_party_services/grant/grants.dart';
 import 'package:narr/shared/widgets/buttons/bullet.dart';
 import 'package:narr/shared/widgets/cards/activities_card.dart';
+import 'package:narr/shared/widgets/cards/institution_info_card.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:narr/shared/globals/global_var.dart';
 import 'package:narr/shared/widgets/cards/blockchain_card.dart';
 import 'package:narr/shared/widgets/cards/primary_card.dart';
 import 'package:narr/shared/widgets/cards/research_card.dart';
 import 'package:narr/shared/widgets/drawer/menu_drawer.dart';
+import 'package:intl/intl.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -134,22 +140,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 25),
-                  // Observer(builder: (_) {
-                  //   return UserInfoCard(
-                  //     institutionLogo: 'assets/images/jpg/profile.jpg',
-                  //     name: currentUser.user.fullName,
-                  //     role: currentUser.user.userRole,
-                  //     email: currentUser.user.email,
-                  //     institutionName: currentUser.user.institution.name,
-                  //     phone: currentUser.user.phone,
-                  //     address: currentUser.user.address,
-                  //     usersOnline:
-                  //         usersOnline.usersOnlineList.length.toString(),
-                  //     onTap: () {},
-                  //   );
-                  // }),
-                  // SizedBox(height: 15),
+                  SizedBox(height: 15),
                 ],
               ),
             ),
@@ -180,6 +171,10 @@ class _DashboardState extends State<Dashboard> {
                       color: Color(0xff00a368),
                       icon: Icons.cloud_upload,
                       title: 'Upload',
+                      onTap: () => narrService.routerService.nextRoute(
+                        context,
+                        ResearchUpload(),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -187,6 +182,10 @@ class _DashboardState extends State<Dashboard> {
                       color: Color(0xffFF7A93),
                       icon: Icons.import_contacts,
                       title: 'Grants',
+                      onTap: () => narrService.routerService.nextRoute(
+                        context,
+                        GrantScreen(),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -194,6 +193,10 @@ class _DashboardState extends State<Dashboard> {
                       color: Color(0xff609CFE),
                       icon: FontAwesomeIcons.handHoldingUsd,
                       title: 'Fund',
+                      onTap: () => narrService.routerService.nextRoute(
+                        context,
+                        CrowdFunding(),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -206,7 +209,17 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 12),
+            InstitutionInfoCard(
+              logo: 'https://app.narr.ng${currentUser.user.institution.logo}',
+              name: currentUser.user.institution.name,
+              acronym: currentUser.user.institution.acronym,
+              type: currentUser.user.institution.type,
+              ownership: currentUser.user.institution.ownership,
+              established: currentUser.user.institution.year,
+              website: currentUser.user.institution.url,
+              onTap: () {},
+            ),
             currentUser.user.userRole == 'researcher'
                 ? ResearchCard(
                     child: Observer(
@@ -489,42 +502,6 @@ class _DashboardState extends State<Dashboard> {
                           ],
                         )
                       : Container(),
-
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     ListTile(
-                  //       leading: MyBullet(Colors.red),
-                  //       title: Text('Researches'),
-                  //     ),
-                  //     ListTile(
-                  //       leading: MyBullet(Colors.green),
-                  //       title: Text('Researches'),
-                  //     ),
-                  //   ],
-                  // ),
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     ListTile(
-                  //       leading: MyBullet(Colors.blue),
-                  //       title: Text('Researches'),
-                  //     ),
-                  //     ListTile(
-                  //       leading: MyBullet(Color(0xff795548)),
-                  //       title: Text('Researches'),
-                  //     ),
-                  //     ListTile(
-                  //       leading: MyBullet(Colors.deepOrange),
-                  //       title: Text('Researches'),
-                  //     ),
-                  //   ],
-                  // ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),
@@ -535,7 +512,11 @@ class _DashboardState extends State<Dashboard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Blockchain Analytics'),
+                    Text(
+                      'Blockchain Analytics',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                     SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -544,7 +525,7 @@ class _DashboardState extends State<Dashboard> {
                           child: AnalyticsCard(
                             title: 'Latest Block',
                             count:
-                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['number']}',
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : NumberFormat.decimalPattern().format(analytics.blockchainAnalytics['number'])}',
                             icon: FontAwesomeIcons.thLarge,
                             onTap: () {},
                             info: '',
@@ -555,7 +536,7 @@ class _DashboardState extends State<Dashboard> {
                           child: AnalyticsCard(
                             title: 'Difficulty',
                             count:
-                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['difficulty']}',
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : NumberFormat.decimalPattern().format(int.parse(analytics.blockchainAnalytics['difficulty']))}',
                             icon: FontAwesomeIcons.chartLine,
                             info: '',
                             onTap: () {},
@@ -582,7 +563,7 @@ class _DashboardState extends State<Dashboard> {
                           child: AnalyticsCard(
                             title: 'Gas Limit',
                             count:
-                                '${analytics.blockchainAnalytics == null ? 'loading...' : analytics.blockchainAnalytics['gasLimit']}',
+                                '${analytics.blockchainAnalytics == null ? 'loading...' : NumberFormat.decimalPattern().format(analytics.blockchainAnalytics['gasLimit'])}',
                             icon: FontAwesomeIcons.gasPump,
                             onTap: () {},
                             info: '',

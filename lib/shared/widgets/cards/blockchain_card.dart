@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:narr/shared/themes/colors.dart';
 
 class AnalyticsCard extends StatelessWidget {
@@ -65,11 +64,15 @@ class AnalyticsCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Image.asset(
-              'assets/images/png/wave.png',
-              width: double.infinity,
-            )
+            SizedBox(height: 12),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              child: Image.asset(
+                'assets/images/png/wave.png',
+                fit: BoxFit.fill,
+              ),
+            ),
           ],
         ),
       ),

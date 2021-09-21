@@ -121,4 +121,8 @@ class UtilityService {
   String dateFormatting(date) {
     return DateFormat('yyyy-MM-dd – kk:mm:a').format(date);
   }
+
+  String numberFormatting(double number) {
+    return NumberFormat.decimalPattern().format(number);
+  }
 }
