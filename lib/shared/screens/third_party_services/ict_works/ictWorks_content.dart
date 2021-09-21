@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_tags/flutter_tags.dart';
-import 'package:narr/core/services/service_injector/service_injectors.dart';
 
 class IctWorksContent extends StatelessWidget {
   const IctWorksContent(
@@ -38,9 +37,13 @@ class IctWorksContent extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8),
-        Image.network(
-          "$imgUrl",
+        Container(
+          width: MediaQuery.of(context).size.width,
           height: 170,
+          child: Image.network(
+            "$imgUrl",
+            fit: BoxFit.fill,
+          ),
         ),
         SizedBox(
           height: 10,
@@ -59,7 +62,7 @@ class IctWorksContent extends StatelessWidget {
         ),
         Tags(
           key: _tagStateKey,
-          itemCount: _items.length, // required
+          itemCount: 5, // required
           itemBuilder: (int index) {
             final item = _items[index];
             return ItemTags(
@@ -79,9 +82,7 @@ class IctWorksContent extends StatelessWidget {
         Row(
           children: [
             ElevatedButton(
-              onPressed: () {
-                narrService.utilityService.launchURL(linkUrl);
-              },
+              onPressed: () {},
               child: Text(
                 'Link',
                 style: TextStyle(color: Colors.white),

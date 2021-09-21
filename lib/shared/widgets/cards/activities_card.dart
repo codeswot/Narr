@@ -26,9 +26,15 @@ class _ActivitiesCardState extends State<ActivitiesCard> {
             child: Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: widget.color,
-              ),
+                  borderRadius: BorderRadius.circular(8),
+                  color: widget.color,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 2.4),
+                      blurRadius: 7,
+                      color: widget.color,
+                    ),
+                  ]),
               child: Icon(
                 widget.icon,
                 size: 20,
