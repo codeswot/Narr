@@ -31,12 +31,7 @@ class _ProfileState extends State<Profile> {
                       Navigator.pop(context);
                     },
                   ),
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      // Navigator.pushNamed(context, EditProfile.id);
-                    },
-                  )
+                  Container(),
                 ],
               ),
               PrimaryCard(
@@ -199,10 +194,12 @@ class _ProfileState extends State<Profile> {
                                   fontWeight: FontWeight.w500, fontSize: 18),
                             ),
                             SizedBox(width: 4.0),
-                            Text(
-                              currentUser.user.institution.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                            Flexible(
+                              child: Text(
+                                currentUser.user.institution.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -233,10 +230,12 @@ class _ProfileState extends State<Profile> {
                                   fontWeight: FontWeight.w500, fontSize: 18),
                             ),
                             SizedBox(width: 4.0),
-                            Text(
-                              currentUser.user.address,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                            Flexible(
+                              child: Text(
+                                currentUser.user.address,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -252,7 +251,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             SizedBox(width: 4.0),
                             Text(
-                              currentUser.user.dob.toString(),
+                              '${currentUser.user.dob.day}/${currentUser.user.dob.month}/${currentUser.user.dob.year}',
                             ),
                           ],
                         ),

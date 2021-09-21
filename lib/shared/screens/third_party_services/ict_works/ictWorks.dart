@@ -42,7 +42,6 @@ class _IctWorksState extends State<IctWorks> {
                 ],
               );
             } else if (snapshot.hasData) {
-              print(data);
               return ListView.separated(
                 itemCount: data.length,
                 separatorBuilder: (BuildContext context, int index) =>
@@ -66,7 +65,7 @@ class _IctWorksState extends State<IctWorks> {
                           imgUrl: img ?? '',
                           categories: data[index]['categories'] ?? "",
                           linkUrl: data[index]['link'] ?? "",
-                          date: data[index]['isoDate'],
+                          date: data[index]['created'],
                         ),
                       ),
                     ],
